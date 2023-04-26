@@ -1,4 +1,4 @@
- public class Departamento {
+public class Departamento {
     // Atributos
     private int id;
     private String nome;

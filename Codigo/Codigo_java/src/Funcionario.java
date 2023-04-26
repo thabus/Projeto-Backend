@@ -6,7 +6,6 @@ public class Funcionario extends Pessoa{
         this.id = id;
     }
 
-
     public int getId(){
         return this.id;
     }
