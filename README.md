@@ -10,3 +10,5 @@
 - Para um funcionário do Comercial, o que é importante ser vizualizado com relação aos chamados?
 - Para um funcionário de Operações, o que deve estar disponível para sua visualização?
 - Os clientes serão pessoas físicas ou jurídicas?
+- No dashboard quais filtros/ pesquisas você gostaria de fazer?
+- Você gostaria de ver chamados por dia, por semana, como exatamente?
