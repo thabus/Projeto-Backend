@@ -9,3 +9,4 @@
 - Para uma pessoa do departamento de TI quais informações são importantes para serem exibidas? 
 - Para um funcionário do Comercial, o que é importante ser vizualizado com relação aos chamados?
 - Para um funcionário de Operações, o que deve estar disponível para sua visualização?
+- Os clientes serão pessoas físicas ou jurídicas?
