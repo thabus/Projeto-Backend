@@ -1,46 +1,20 @@
 public class Usuario {
     private int id;
-    private String login;
+    private String nome;
+    private String email;
     private String senha;
-    private int idCliente;
-    private int idFuncinario;
+    private String cargo;
+    private String setor;
+    private String telefone;
 
-    public Usuario(int id, String login, String senha, int idCliente, int idFuncinario) {
+    public Usuario(int id, String nome, String email, String senha, String cargo, String setor, String telefone) {
         this.id = id;
-        this.login = login;
+        this.nome = nome;
+        this.email = email;
         this.senha = senha;
-        this.idCliente = idCliente;
-        this.idFuncinario = idFuncinario;
-    }
-
-    public Usuario(String login, String senha, int idCliente, int idFuncinario) {
-        this.login = login;
-        this.senha = senha;
-        this.idCliente = idCliente;
-        this.idFuncinario = idFuncinario;
-    }
-
-    public void readUsuario(Usuario usuario) {
-        System.out.println(usuario);
-    }
-
-    public void updateUsuario(int id, String login, String senha, int idCliente, int idFuncinario) {
-        this.id = id;
-        this.login = login;
-        this.senha = senha;
-        this.idCliente = idCliente;
-        this.idFuncinario = idFuncinario;
-    }
-
-    @Override
-    public String toString() {
-        return
-            " Id: " + getId() + "\n" +
-            "Login: " + getLogin() + "\n" +
-            "Senha: " + getSenha() + "\n" +
-            "idCliente: " + getIdCliente() + "\n" +
-            "idFuncinario: "  + getIdFuncinario()
-            ;
+        this.cargo = cargo;
+        this.setor = setor;
+        this.telefone = telefone;
     }
 
     public int getId() {
@@ -51,12 +25,20 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getLogin() {
-        return this.login;
+    public String getNome() {
+        return this.nome;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSenha() {
@@ -67,21 +49,41 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public int getIdCliente() {
-        return this.idCliente;
+    public String getCargo() {
+        return this.cargo;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
     }
 
-    public int getIdFuncinario() {
-        return this.idFuncinario;
+    public String getSetor() {
+        return this.setor;
     }
 
-    public void setIdFuncinario(int idFuncinario) {
-        this.idFuncinario = idFuncinario;
+    public void setSetor(String setor) {
+        this.setor = setor;
     }
 
+    public String getTelefone() {
+        return this.telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", nome='" + getNome() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", senha='" + getSenha() + "'" +
+            ", cargo='" + getCargo() + "'" +
+            ", setor='" + getSetor() + "'" +
+            ", telefone='" + getTelefone() + "'" +
+            "}";
+    }
 
 }

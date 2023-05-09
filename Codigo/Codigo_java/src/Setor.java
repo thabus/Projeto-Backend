@@ -1,17 +1,17 @@
-public class Departamento {
+public class Setor {
     private int id;
     private String nome;
     private String localizacao;
     private int gerente;
 
-    public Departamento(int id, String nome, String localizacao, int gerente) {
+    public Setor(int id, String nome, String localizacao, int gerente) {
         this.id = id;
         this.nome = nome;
         this.localizacao = localizacao;
         this.gerente = gerente;
     }
 
-    public void readDepartamento(Departamento departamento) {
+    public void readDepartamento(Setor departamento) {
         System.out.println(departamento);
     }
 
