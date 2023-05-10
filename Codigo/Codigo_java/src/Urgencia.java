@@ -1,3 +1,3 @@
-public class Urgencia {
-    
+public enum Urgencia {
+   // escala ou dias? 
 }
