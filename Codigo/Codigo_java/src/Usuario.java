@@ -1,20 +1,20 @@
 public class Usuario {
     private int id;
-    private String login;
+    private String email;
     private String senha;
     private int idCliente;
     private int idFuncinario;
 
-    public Usuario(int id, String login, String senha, int idCliente, int idFuncinario) {
+    public Usuario(int id, String email, String senha, int idCliente, int idFuncinario) {
         this.id = id;
-        this.login = login;
+        this.email = email;
         this.senha = senha;
         this.idCliente = idCliente;
         this.idFuncinario = idFuncinario;
     }
 
-    public Usuario(String login, String senha, int idCliente, int idFuncinario) {
-        this.login = login;
+    public Usuario(String email, String senha, int idCliente, int idFuncinario) {
+        this.email = email;
         this.senha = senha;
         this.idCliente = idCliente;
         this.idFuncinario = idFuncinario;
@@ -24,9 +24,9 @@ public class Usuario {
         System.out.println(usuario);
     }
 
-    public void updateUsuario(int id, String login, String senha, int idCliente, int idFuncinario) {
+    public void updateUsuario(int id, String email, String senha, int idCliente, int idFuncinario) {
         this.id = id;
-        this.login = login;
+        this.email = email;
         this.senha = senha;
         this.idCliente = idCliente;
         this.idFuncinario = idFuncinario;
@@ -36,7 +36,7 @@ public class Usuario {
     public String toString() {
         return
             " Id: " + getId() + "\n" +
-            "Login: " + getLogin() + "\n" +
+            "Login: " + getEmail() + "\n" +
             "Senha: " + getSenha() + "\n" +
             "idCliente: " + getIdCliente() + "\n" +
             "idFuncinario: "  + getIdFuncinario()
@@ -51,12 +51,12 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getLogin() {
-        return this.login;
+    public String getEmail() {
+        return this.email;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setLogin(String email) {
+        this.email = email;
     }
 
     public String getSenha() {
