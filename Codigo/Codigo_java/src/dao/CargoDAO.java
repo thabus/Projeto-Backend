@@ -41,7 +41,23 @@ public class CargoDAO {
 
             return pstm.execute();  
         }
+    }
 
+    public Cargo getByNome(String nome) throws SQLException {
+        CriaConexao criaConexao = new CriaConexao();
+        Connection connection = criaConexao.recuperarConexao();
+        String sql = "SELECT * FROM cargo WHERE nome = ?";
+
+        try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)) {
+            pstm.setString(1, nome);
+            ResultSet rst = pstm.executeQuery();
+            Cargo cargo = null;
+            if (rst.next()) {
+                cargo = new Cargo(rst.getString("nome"), rst.getInt("id_setor"));
+            }
+
+            return cargo;
+        } 
     }
 
     public ArrayList<Cargo> retriveAll() throws SQLException {
@@ -83,7 +99,4 @@ public class CargoDAO {
             return pstm.execute();  
         }
     }
-
-
-
 }
