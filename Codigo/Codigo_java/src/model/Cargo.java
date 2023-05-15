@@ -1,3 +1,4 @@
+package model;
 public class Cargo {
 
     private String nome;
