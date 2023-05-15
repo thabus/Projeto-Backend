@@ -1,4 +1,7 @@
 package model;
+
+import dao.UsuarioDAO;
+
 public class Usuario {
     private int id;
     private String nome;
@@ -16,6 +19,15 @@ public class Usuario {
         this.cargo = cargo;
         this.setor = setor;
         this.telefone = telefone;
+
+    }
+
+    public Usuario(String nome, String email, String senha, String telefone) {
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.senha = senha;
+
     }
 
     public int getId() {
@@ -86,5 +98,6 @@ public class Usuario {
             ", telefone='" + getTelefone() + "'" +
             "}";
     }
+
 
 }

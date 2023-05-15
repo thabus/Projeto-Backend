@@ -19,6 +19,8 @@ public class TestaInsercao {
             System.out.println(escala);
         }
         connection.close();
+
+        
     }
 
     private static Integer getInt(String string) {
