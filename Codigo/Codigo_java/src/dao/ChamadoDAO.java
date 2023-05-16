@@ -67,4 +67,37 @@ public class ChamadoDAO {
         }
 
     }
+
+
+    public ArrayList<Chamado> retriveAll() throws SQLException {
+        CriaConexao criaConexao = new CriaConexao();
+        Connection connection = criaConexao.recuperarConexao();
+        Statement stm = connection.createStatement();
+        String sql = "SELECT * FROM chamado";
+
+        stm.execute(sql);
+        ResultSet rst = stm.getResultSet();
+        ArrayList<Chamado> chamados = new ArrayList<Chamado>();
+        while (rst.next()){
+            int protocolo = rst.getInt("protocolo");
+            String status = rst.getString("status");
+            String titulo = rst.getString("titulo");
+            String descricao = rst.getString("descricao");
+            String idUsuario = rst.getString("id_usuario");
+            String nomeSolicitante = rst.getString("nome_solicitante");
+            String emailSolicitante = rst.getString("email_solicitante");
+            String telefoneSolicitante = rst.getString("telefone_solicitante");
+            Date dataAbertura = rst.getDate("data_abertura");
+
+            Chamado cha = new Chamado(protocolo, status, titulo, descricao, idUsuario, nomeSolicitante, emailSolicitante, telefoneSolicitante, dataAbertura);
+            chamados.add(cha);
+        }
+        if (!rst.next()) {
+            System.out.println("Não existem dados para exibição.");
+        }
+        connection.close();
+
+        return chamados;
+    }
+
 }
