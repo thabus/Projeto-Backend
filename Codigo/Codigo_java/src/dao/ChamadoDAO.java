@@ -31,4 +31,40 @@ public class ChamadoDAO {
         }    
     }
 
+    public boolean delete(Chamado chamado) throws SQLException {
+        CriaConexao criaConexao = new CriaConexao();
+        Connection connection = criaConexao.recuperarConexao();
+
+        String sql = "DELETE FROM chamado WHERE protocolo = ?";
+        try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)) {
+            pstm.setInt(1, chamado.getProtocolo());
+            pstm.execute();
+            if (pstm.execute() == false) {
+                System.out.println("Chamado não encontrado.");
+            } else {
+                System.out.println("Chamado excluído com sucesso.");
+            }
+            connection.close();
+
+            return pstm.execute();  
+        }
+    }
+    
+    public Chamado getByProtocolo(int protocolo) throws SQLException {
+        CriaConexao criaConexao = new CriaConexao();
+        Connection connection = criaConexao.recuperarConexao();
+        String sql = "SELECT * FROM chamado WHERE protocolo = ?";
+
+        try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)){
+            pstm.setInt(1, protocolo);
+            ResultSet rst = pstm.executeQuery();
+          Chamado chamado = null;
+            if (rst.next()) {
+                chamado = new Chamado(rst.getInt("protocolo"), rst.getString("status"), rst.getString("titulo"), rst.getString("descricao"), rst.getInt("id_usuario"), rst.getString("nome_solicitante"), rst.getString("email_solicitante"), rst.getString("telefone_solicitante"), rst.getDate("data_abertura"));
+            }
+
+            return chamado;        
+        }
+
+    }
 }

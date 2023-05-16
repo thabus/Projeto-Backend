@@ -38,6 +38,18 @@ public class Chamado {
         this.urgencia = urgencia;
     }
 
+    public Chamado(int protocolo, String status, String titulo, String descricao, int idUsuario, String nomeSolicitante, String emailSolicitante, String telefoneSolicitante, Date dataAbertura) {
+        this.protocolo = protocolo;
+        this.status = status;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.idUsuario = idUsuario;
+        this.nomeSolicitante = nomeSolicitante;
+        this.emailSolicitante = emailSolicitante;
+        this.telefoneSolicitante = telefoneSolicitante;
+        this.dataAbertura = dataAbertura;
+    }
+
     public int getProtocolo() {
         return this.protocolo;
     }
