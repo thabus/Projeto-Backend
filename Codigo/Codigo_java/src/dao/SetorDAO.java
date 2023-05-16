@@ -14,12 +14,11 @@ public class SetorDAO {
         CriaConexao criaConexao = new CriaConexao();
         Connection connection = criaConexao.recuperarConexao();
 
-        String sql = "INSERT INTO setor (id, nome, localizacao, gerente_id) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO setor (nome, localizacao, gerente_id) VALUES (?, ?, ?)";
         try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)) {
-            pstm.setInt(1, setor.getId());
-            pstm.setString(2, setor.getNome());
-            pstm.setString(3, setor.getLocalizacao());
-            pstm.setInt(4, setor.getGerente());
+            pstm.setString(1, setor.getNome());
+            pstm.setString(2, setor.getLocalizacao());
+            pstm.setInt(3, setor.getGerente());
 
             connection.close();
             return pstm.execute();
