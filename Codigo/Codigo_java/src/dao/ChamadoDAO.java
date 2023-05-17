@@ -1,5 +1,6 @@
 package dao;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,7 +29,7 @@ public class ChamadoDAO {
 
             connection.close();
             return pstm.execute();
-        }    
+        }
     }
 
     public boolean delete(Chamado chamado) throws SQLException {
@@ -46,10 +47,10 @@ public class ChamadoDAO {
             }
             connection.close();
 
-            return pstm.execute();  
+            return pstm.execute();
         }
     }
-    
+
     public Chamado getByProtocolo(int protocolo) throws SQLException {
         CriaConexao criaConexao = new CriaConexao();
         Connection connection = criaConexao.recuperarConexao();
@@ -63,7 +64,7 @@ public class ChamadoDAO {
                 chamado = new Chamado(rst.getInt("protocolo"), rst.getString("status"), rst.getString("titulo"), rst.getString("descricao"), rst.getInt("id_usuario"), rst.getString("nome_solicitante"), rst.getString("email_solicitante"), rst.getString("telefone_solicitante"), rst.getDate("data_abertura"));
             }
 
-            return chamado;        
+            return chamado;
         }
 
     }
@@ -83,14 +84,14 @@ public class ChamadoDAO {
             String status = rst.getString("status");
             String titulo = rst.getString("titulo");
             String descricao = rst.getString("descricao");
-            String idUsuario = rst.getString("id_usuario");
+            int idUsuario = rst.getInt("id_usuario");
             String nomeSolicitante = rst.getString("nome_solicitante");
             String emailSolicitante = rst.getString("email_solicitante");
             String telefoneSolicitante = rst.getString("telefone_solicitante");
             Date dataAbertura = rst.getDate("data_abertura");
-
-            Chamado cha = new Chamado(protocolo, status, titulo, descricao, idUsuario, nomeSolicitante, emailSolicitante, telefoneSolicitante, dataAbertura);
-            chamados.add(cha);
+            
+            Chamado c = new Chamado(protocolo, status, titulo, descricao, idUsuario, nomeSolicitante, emailSolicitante, telefoneSolicitante, dataAbertura);
+            chamados.add(c);
         }
         if (!rst.next()) {
             System.out.println("Não existem dados para exibição.");
@@ -120,7 +121,7 @@ public class ChamadoDAO {
 
             connection.close();
 
-            return pstm.execute();  
+            return pstm.execute();
         }
     }
 

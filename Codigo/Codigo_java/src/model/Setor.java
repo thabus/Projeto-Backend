@@ -12,17 +12,6 @@ public class Setor {
         this.gerente = gerente;
     }
 
-    public void readDepartamento(Setor departamento) {
-        System.out.println(departamento);
-    }
-
-    public void updateDepartamento(int id, String nome, String localizacao, int gerente) {
-        this.id = id;
-        this.nome = nome;
-        this.localizacao = localizacao;
-        this.gerente = gerente;
-    }
-
     @Override
     public String toString() {
         return

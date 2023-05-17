@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class CriaConexao {
     public Connection recuperarConexao() throws SQLException{
         Connection connection = DriverManager.getConnection
-        ("jdbc:mysql://localhost/projeto-backend?useTimezone=UTC","root", "mysqlroot");
+        ("jdbc:mysql://localhost/projeto?useTimezone=UTC","root", "mysqlroot");
 
         return connection;
     }

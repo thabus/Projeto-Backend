@@ -49,7 +49,6 @@ public class Chamado {
         this.telefoneSolicitante = telefoneSolicitante;
         this.dataAbertura = dataAbertura;
     }
-    //Novo construtor com apenas os Not Null
 
     public int getProtocolo() {
         return this.protocolo;
