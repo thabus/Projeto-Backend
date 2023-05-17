@@ -13,7 +13,9 @@ import model.Usuario;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
+
         testeCargoDAO();
+
     }
 
     public static void testeCargoDAO() throws SQLException {
@@ -42,7 +44,7 @@ public class Main {
     }
 
     public static void testeChamadoDAO() throws SQLException {
-        Chamado chamado1 = new Chamado(1234, "aberto", "Troca de Fonte", "Meu computador queimou", 123445,"Amanda Senra", "amanda@gmail.com", "219121212131", new Date(2023, 08, 19));
+        Chamado chamado1 = new Chamado(1234, "aberto", "Troca de Fonte", "Meu computador queimou", 123445,"Amanda Senra", "amanda@gmail.com", "219121212131", new Date(2023, 8, 19));
         ChamadoDAO chamadao = new ChamadoDAO();
 
         chamadao.create(chamado1);

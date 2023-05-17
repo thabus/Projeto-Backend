@@ -1,3 +1,9 @@
+//
+// EXCLUIR CARGODAO E SETORDAO
+// CARGO E SETOR NÃO VÃO SER MANIPULADOS
+//
+
+
 package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

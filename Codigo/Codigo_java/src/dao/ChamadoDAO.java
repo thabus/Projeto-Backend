@@ -14,6 +14,7 @@ public class ChamadoDAO {
     public boolean create(Chamado chamado) throws SQLException {
         CriaConexao criaConexao = new CriaConexao();
         Connection connection = criaConexao.recuperarConexao();
+        boolean sucesso = false;
 
         String sql = "INSERT INTO chamado (protocolo, status, titulo, descricao, id_usuario, nome_solicitante, email_solicitante, telefone_solicitante, data_abertura) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)) {
@@ -27,27 +28,24 @@ public class ChamadoDAO {
             pstm.setString(8, chamado.getTelefoneSolicitante());
             pstm.setDate(9, chamado.getDataAbertura());
 
+            sucesso = pstm.execute();
             connection.close();
-            return pstm.execute();
+            return sucesso;
         }
     }
 
     public boolean delete(Chamado chamado) throws SQLException {
         CriaConexao criaConexao = new CriaConexao();
         Connection connection = criaConexao.recuperarConexao();
+        boolean sucesso = false;
 
         String sql = "DELETE FROM chamado WHERE protocolo = ?";
         try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)) {
             pstm.setInt(1, chamado.getProtocolo());
-            pstm.execute();
-            if (pstm.execute() == false) {
-                System.out.println("Chamado não encontrado.");
-            } else {
-                System.out.println("Chamado excluído com sucesso.");
-            }
+            
+            sucesso = pstm.execute();
             connection.close();
-
-            return pstm.execute();
+            return sucesso;
         }
     }
 
@@ -59,14 +57,14 @@ public class ChamadoDAO {
         try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)){
             pstm.setInt(1, protocolo);
             ResultSet rst = pstm.executeQuery();
-          Chamado chamado = null;
+            Chamado chamado = null;
             if (rst.next()) {
                 chamado = new Chamado(rst.getInt("protocolo"), rst.getString("status"), rst.getString("titulo"), rst.getString("descricao"), rst.getInt("id_usuario"), rst.getString("nome_solicitante"), rst.getString("email_solicitante"), rst.getString("telefone_solicitante"), rst.getDate("data_abertura"));
             }
+            connection.close();
 
             return chamado;
         }
-
     }
 
 
@@ -93,9 +91,6 @@ public class ChamadoDAO {
             Chamado c = new Chamado(protocolo, status, titulo, descricao, idUsuario, nomeSolicitante, emailSolicitante, telefoneSolicitante, dataAbertura);
             chamados.add(c);
         }
-        if (!rst.next()) {
-            System.out.println("Não existem dados para exibição.");
-        }
         connection.close();
 
         return chamados;
@@ -104,6 +99,7 @@ public class ChamadoDAO {
     public boolean update(Chamado chamado) throws SQLException {
         CriaConexao criaConexao = new CriaConexao();
         Connection connection = criaConexao.recuperarConexao();
+        boolean sucesso = false;
 
         String sql = "UPDATE chamado SET status = ?, titulo = ?, descricao = ?, id_usuario = ?, nome_solictante = ?, email_solicitante = ?, telefone_solictante = ?, data_abertura = ? WHERE protocolo = ?";
         try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)) {
@@ -116,12 +112,10 @@ public class ChamadoDAO {
             pstm.setString(7, chamado.getEmailSolicitante());
             pstm.setString(8, chamado.getTelefoneSolicitante());
             pstm.setDate(9, chamado.getDataAbertura());
-            pstm.execute();
-            System.out.println("Chamado atualizado.");
-
+            
+            sucesso = pstm.execute();
             connection.close();
-
-            return pstm.execute();
+            return sucesso;
         }
     }
 

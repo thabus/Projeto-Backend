@@ -13,6 +13,7 @@ public class UsuarioDAO {
     public boolean create(Usuario usuario) throws SQLException{
         CriaConexao criaConexao = new CriaConexao();
         Connection connection = criaConexao.recuperarConexao();
+        boolean sucesso = false;
 
         String sql = "INSERT INTO usuario(nome, email, senha, cargo, setor, telefone) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)) {
@@ -23,27 +24,24 @@ public class UsuarioDAO {
             pstm.setString(5, usuario.getSetor());
             pstm.setString(6, usuario.getTelefone());
 
+            sucesso = pstm.execute();
             connection.close();
-            return pstm.execute();
+            return sucesso;
         }
     }
 
     public boolean delete(Usuario usuario) throws SQLException {
         CriaConexao criaConexao = new CriaConexao();
         Connection connection = criaConexao.recuperarConexao();
+        boolean sucesso = false;
 
         String sql = "DELETE FROM usuario WHERE id = ?";
         try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)) {
             pstm.setInt(1, usuario.getId());
-            pstm.execute();
-            if (pstm.execute() == false) {
-                System.out.println("Usuário não encontrado.");
-            } else {
-                System.out.println("Usuário excluído com sucesso.");
-            }
-            connection.close();
 
-            return pstm.execute();  
+            sucesso = pstm.execute();
+            connection.close();
+            return sucesso; 
         }
     }
 
@@ -82,12 +80,8 @@ public class UsuarioDAO {
             String setor = rst.getString("setor");
             String telefone = rst.getString("telefone");
             
-
             Usuario u = new Usuario(id, nome, email, senha, cargo, setor, telefone);
             usuarios.add(u);
-        }
-        if (!rst.next()) {
-            System.out.println("Não existem dados para exibição.");
         }
         connection.close();
 
@@ -97,6 +91,8 @@ public class UsuarioDAO {
     public boolean update(Usuario usuario) throws SQLException {
         CriaConexao criaConexao = new CriaConexao();
         Connection connection = criaConexao.recuperarConexao();
+        boolean sucesso = false;
+
 
         String sql = "UPDATE usuario SET nome = ?, email = ?, senha = ?, cargo = ?, setor = ?, telefone = ? WHERE id = ?";
         try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)) {
@@ -107,12 +103,10 @@ public class UsuarioDAO {
             pstm.setString(5, usuario.getSetor());
             pstm.setString(6, usuario.getTelefone());
             pstm.setInt(7, usuario.getId());
-            pstm.execute();
-            System.out.println("Usuário atualizado.");
 
+            sucesso = pstm.execute();
             connection.close();
-
-            return pstm.execute();  
+            return sucesso; 
         }
     }
 }
