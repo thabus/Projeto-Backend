@@ -2,9 +2,8 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import dao.CargoDAO;
+
 import dao.ChamadoDAO;
-import dao.SetorDAO;
 import dao.UsuarioDAO;
 import model.Cargo;
 import model.Chamado;
@@ -14,33 +13,8 @@ import model.Usuario;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-        testeCargoDAO();
+        
 
-    }
-
-    public static void testeCargoDAO() throws SQLException {
-        Cargo cargo1 = new Cargo("Analista", 2);
-        Cargo cargo2 = new Cargo("Gerente", 2);
-        Cargo cargo3 = new Cargo("Operações", 3);
-        CargoDAO cdao = new CargoDAO();
-
-        cdao.delete(cargo1);
-        cdao.delete(cargo2);
-        cdao.delete(cargo3);
-
-        cdao.create(cargo1);
-        cdao.create(cargo2);
-        cdao.create(cargo3);
-
-        cdao.update(cargo3);
-
-        System.out.println(cdao.getByNome("Operações"));
-
-        ArrayList<Cargo> cargos =  cdao.retriveAll();
-
-        for (Cargo cargo : cargos) {
-            System.out.println(cargo.getNome());
-        }
     }
 
     public static void testeChamadoDAO() throws SQLException {
@@ -55,12 +29,5 @@ public class Main {
         UsuarioDAO udao = new UsuarioDAO();
 
         udao.create(usuario1);
-    }
-
-    public static void testeSetorDAO() throws SQLException {
-        Setor setor1 = new Setor(1, "Vitor", "TI", 12345);
-        SetorDAO sdao = new SetorDAO();
-
-        sdao.create(setor1);
     }
 }
