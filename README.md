@@ -9,3 +9,5 @@
 - [ ] Não precisa do CargoDAO
 - [ ] Rever SetorDAO (precisa? provavelmente não)
 - [ ] Alterar retornos dos métodos?
+- [ ] Testar métodos
+- [ ] Fazer selects a serem usados
