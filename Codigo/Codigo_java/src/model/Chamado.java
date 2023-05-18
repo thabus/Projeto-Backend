@@ -15,9 +15,10 @@ public class Chamado {
     private int idResponsavel;
     private Date dataAbertura;
     private Date dataFechamento;
+    private int urgencia;
     private Date prazo;
     private Date dataPrazo;
-    private int urgencia;
+    
 
     public Chamado(int protocolo, String status, int idSetor, String tipo, String titulo, String descricao, int idUsuario, String nomeSolicitante, String emailSolicitante, String telefoneSolicitante, int idResponsavel, Date dataAbertura, Date dataFechamento, Date prazo, Date dataPrazo, int urgencia) {
         this.protocolo = protocolo;

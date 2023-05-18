@@ -93,7 +93,6 @@ public class UsuarioDAO {
         Connection connection = criaConexao.recuperarConexao();
         boolean sucesso = false;
 
-
         String sql = "UPDATE usuario SET nome = ?, email = ?, senha = ?, cargo = ?, setor = ?, telefone = ? WHERE id = ?";
         try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)) {
             pstm.setString(1, usuario.getNome());
