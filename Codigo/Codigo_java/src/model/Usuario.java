@@ -2,8 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import dao.UsuarioDAO;
-
 public class Usuario {
     private int id;
     private String nome;

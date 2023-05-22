@@ -1,5 +1,5 @@
 package model;
-import javax.xml.crypto.Data;
+import java.sql.Date;
 
 public class Chamado {
     private int protocolo;
@@ -13,13 +13,14 @@ public class Chamado {
     private String emailSolicitante;
     private String telefoneSolicitante;
     private int idResponsavel;
-    private Data dataAbertura;
-    private Data dataFechamento;
-    private Data prazo;
-    private Data dataPrazo;
+    private Date dataAbertura;
+    private Date dataFechamento;
     private int urgencia;
+    private Date prazo;
+    private Date dataPrazo;
+    
 
-    public Chamado(int protocolo, String status, int idSetor, String tipo, String titulo, String descricao, int idUsuario, String nomeSolicitante, String emailSolicitante, String telefoneSolicitante, int idResponsavel, Data dataAbertura, Data dataFechamento, Data prazo, Data dataPrazo, int urgencia) {
+    public Chamado(int protocolo, String status, int idSetor, String tipo, String titulo, String descricao, int idUsuario, String nomeSolicitante, String emailSolicitante, String telefoneSolicitante, int idResponsavel, Date dataAbertura, Date dataFechamento, Date prazo, Date dataPrazo, int urgencia) {
         this.protocolo = protocolo;
         this.status = status;
         this.idSetor = idSetor;
@@ -36,6 +37,18 @@ public class Chamado {
         this.prazo = prazo;
         this.dataPrazo = dataPrazo;
         this.urgencia = urgencia;
+    }
+
+    public Chamado(int protocolo, String status, String titulo, String descricao, int idUsuario, String nomeSolicitante, String emailSolicitante, String telefoneSolicitante, Date dataAbertura) {
+        this.protocolo = protocolo;
+        this.status = status;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.idUsuario = idUsuario;
+        this.nomeSolicitante = nomeSolicitante;
+        this.emailSolicitante = emailSolicitante;
+        this.telefoneSolicitante = telefoneSolicitante;
+        this.dataAbertura = dataAbertura;
     }
 
     public int getProtocolo() {
@@ -126,35 +139,35 @@ public class Chamado {
         this.idResponsavel = idResponsavel;
     }
 
-    public Data getDataAbertura() {
+    public Date getDataAbertura() {
         return this.dataAbertura;
     }
 
-    public void setDataAbertura(Data dataAbertura) {
+    public void setDataAbertura(Date dataAbertura) {
         this.dataAbertura = dataAbertura;
     }
 
-    public Data getDataFechamento() {
+    public Date getDataFechamento() {
         return this.dataFechamento;
     }
 
-    public void setDataFechamento(Data dataFechamento) {
+    public void setDataFechamento(Date dataFechamento) {
         this.dataFechamento = dataFechamento;
     }
 
-    public Data getPrazo() {
+    public Date getPrazo() {
         return this.prazo;
     }
 
-    public void setPrazo(Data prazo) {
+    public void setPrazo(Date prazo) {
         this.prazo = prazo;
     }
 
-    public Data getDataPrazo() {
+    public Date getDataPrazo() {
         return this.dataPrazo;
     }
 
-    public void setDataPrazo(Data dataPrazo) {
+    public void setDataPrazo(Date dataPrazo) {
         this.dataPrazo = dataPrazo;
     }
 
