@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import dao.UsuarioDAO;
 
 public class Usuario {
@@ -7,11 +9,12 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
-    private String cargo;
-    private String setor;
+    private Cargo cargo;
+    private Setor setor;
     private String telefone;
+    ArrayList<Chamado> chamados = new ArrayList<>();
 
-    public Usuario(int id, String nome, String email, String senha, String cargo, String setor, String telefone) {
+    public Usuario(int id, String nome, String email, String senha, Cargo cargo, Setor setor, String telefone) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -62,19 +65,19 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public String getCargo() {
+    public Cargo getCargo() {
         return this.cargo;
     }
 
-    public void setCargo(String cargo) {
+    public void setCargo(Cargo cargo) {
         this.cargo = cargo;
     }
 
-    public String getSetor() {
+    public Setor getSetor() {
         return this.setor;
     }
 
-    public void setSetor(String setor) {
+    public void setSetor(Setor setor) {
         this.setor = setor;
     }
 
