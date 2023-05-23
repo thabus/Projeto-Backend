@@ -3,9 +3,9 @@ public class Setor {
     private int id;
     private String nome;
     private String localizacao;
-    private int gerente;
+    private Usuario gerente;
 
-    public Setor(int id, String nome, String localizacao, int gerente) {
+    public Setor(int id, String nome, String localizacao, Usuario gerente) {
         this.id = id;
         this.nome = nome;
         this.localizacao = localizacao;
@@ -46,11 +46,11 @@ public class Setor {
         this.localizacao = localizacao;
     }
 
-    public int getGerente() {
+    public Usuario getGerente() {
         return this.gerente;
     }
 
-    public void setGerente(int gerente) {
+    public void setGerente(Usuario gerente) {
         this.gerente = gerente;
     }
 

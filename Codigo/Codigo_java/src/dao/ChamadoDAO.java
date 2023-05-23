@@ -102,7 +102,7 @@ public class ChamadoDAO {
         return chamados;
     }
 
-    public boolean update(Chamado chamado) throws SQLException {
+    public boolean updateAll(Chamado chamado) throws SQLException {
         CriaConexao criaConexao = new CriaConexao();
         Connection connection = criaConexao.recuperarConexao();
         boolean sucesso = false;
@@ -132,4 +132,59 @@ public class ChamadoDAO {
             return sucesso;
         }
     }
+
+    public boolean updateStatus(Chamado chamado) throws SQLException {
+        CriaConexao criaConexao = new CriaConexao();
+        Connection connection = criaConexao.recuperarConexao();
+        boolean sucesso = false;
+
+        String sql = "UPDATE chamado SET status = ? WHERE protocolo = ?";
+        try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)) {
+            
+            pstm.setString(1, chamado.getStatus());
+            pstm.setInt(2, chamado.getProtocolo());
+
+            sucesso = pstm.execute();
+            connection.close();
+            return sucesso;
+        }
+    }
+
+    public boolean updateResponsavel(Chamado chamado) throws SQLException {
+        CriaConexao criaConexao = new CriaConexao();
+        Connection connection = criaConexao.recuperarConexao();
+        boolean sucesso = false;
+
+        String sql = "UPDATE chamado id_responsavel = ? WHERE protocolo = ?";
+        try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)) {
+            
+            pstm.setInt(1, chamado.getIdResponsavel());
+            pstm.setInt(2, chamado.getProtocolo());
+
+            sucesso = pstm.execute();
+            connection.close();
+            return sucesso;
+        }
+    }
+
+    public boolean updateTriagem(Chamado chamado) throws SQLException {
+        CriaConexao criaConexao = new CriaConexao();
+        Connection connection = criaConexao.recuperarConexao();
+        boolean sucesso = false;
+
+        String sql = "UPDATE chamado SET id_setor = ?, tipo = ?, urgencia = ? WHERE protocolo = ?";
+        try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)) {
+            
+            pstm.setInt(1, chamado.getIdSetor());
+            pstm.setString(2, chamado.getTipo());
+            pstm.setInt(3, chamado.getUrgencia());
+            pstm.setInt(4, chamado.getProtocolo());
+
+            sucesso = pstm.execute();
+            connection.close();
+            return sucesso;
+        }
+    }
 }
+
+

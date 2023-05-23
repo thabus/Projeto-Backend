@@ -2,9 +2,9 @@ package model;
 public class Cargo {
 
     private String nome;
-    private int idSetor;
+    private Setor idSetor;
 
-    public Cargo(String nome, int idSetor) {
+    public Cargo(String nome, Setor idSetor) {
         this.nome = nome;
         this.idSetor = idSetor;
     }
@@ -17,11 +17,11 @@ public class Cargo {
         this.nome = nome;
     }
 
-    public int getIdSetor() {
+    public Setor getIdSetor() {
         return this.idSetor;
     }
 
-    public void setIdSetor(int idSetor) {
+    public void setIdSetor(Setor idSetor) {
         this.idSetor = idSetor;
     }
 

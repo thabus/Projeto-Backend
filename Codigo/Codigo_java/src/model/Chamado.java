@@ -1,5 +1,5 @@
 package model;
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Chamado {
     private int protocolo;
@@ -13,14 +13,14 @@ public class Chamado {
     private String emailSolicitante;
     private String telefoneSolicitante;
     private int idResponsavel;
-    private Date dataAbertura;
-    private Date dataFechamento;
+    private LocalDate dataAbertura;
+    private LocalDate dataFechamento;
     private int urgencia;
-    private Date prazo;
-    private Date dataPrazo;
+    private LocalDate prazo;
+    private LocalDate dataPrazo;
     
 
-    public Chamado(int protocolo, String status, int idSetor, String tipo, String titulo, String descricao, int idUsuario, String nomeSolicitante, String emailSolicitante, String telefoneSolicitante, int idResponsavel, Date dataAbertura, Date dataFechamento, Date prazo, Date dataPrazo, int urgencia) {
+    public Chamado(int protocolo, String status, int idSetor, String tipo, String titulo, String descricao, int idUsuario, String nomeSolicitante, String emailSolicitante, String telefoneSolicitante, int idResponsavel, LocalDate dataAbertura, LocalDate dataFechamento, LocalDate prazo, LocalDate dataPrazo, int urgencia) {
         this.protocolo = protocolo;
         this.status = status;
         this.idSetor = idSetor;
@@ -39,7 +39,7 @@ public class Chamado {
         this.urgencia = urgencia;
     }
 
-    public Chamado(int protocolo, String status, String titulo, String descricao, int idUsuario, String nomeSolicitante, String emailSolicitante, String telefoneSolicitante, Date dataAbertura) {
+    public Chamado(int protocolo, String status, String titulo, String descricao, int idUsuario, String nomeSolicitante, String emailSolicitante, String telefoneSolicitante, LocalDate dataAbertura) {
         this.protocolo = protocolo;
         this.status = status;
         this.titulo = titulo;
@@ -139,35 +139,35 @@ public class Chamado {
         this.idResponsavel = idResponsavel;
     }
 
-    public Date getDataAbertura() {
+    public LocalDate getDataAbertura() {
         return this.dataAbertura;
     }
 
-    public void setDataAbertura(Date dataAbertura) {
+    public void setDataAbertura(LocalDate dataAbertura) {
         this.dataAbertura = dataAbertura;
     }
 
-    public Date getDataFechamento() {
+    public LocalDate getDataFechamento() {
         return this.dataFechamento;
     }
 
-    public void setDataFechamento(Date dataFechamento) {
+    public void setDataFechamento(LocalDate dataFechamento) {
         this.dataFechamento = dataFechamento;
     }
 
-    public Date getPrazo() {
+    public LocalDate getPrazo() {
         return this.prazo;
     }
 
-    public void setPrazo(Date prazo) {
+    public void setPrazo(LocalDate prazo) {
         this.prazo = prazo;
     }
 
-    public Date getDataPrazo() {
+    public LocalDate getDataPrazo() {
         return this.dataPrazo;
     }
 
-    public void setDataPrazo(Date dataPrazo) {
+    public void setDataPrazo(LocalDate dataPrazo) {
         this.dataPrazo = dataPrazo;
     }
 
