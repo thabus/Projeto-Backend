@@ -11,7 +11,7 @@ import model.Setor;
 import model.Usuario;
 
 public class UsuarioDAO {
-    
+
     public boolean create(Usuario usuario) throws SQLException{
         CriaConexao criaConexao = new CriaConexao();
         Connection connection = criaConexao.recuperarConexao();
@@ -22,8 +22,8 @@ public class UsuarioDAO {
             pstm.setString(1, usuario.getNome());
             pstm.setString(2, usuario.getEmail());
             pstm.setString(3, usuario.getSenha());
-            pstm.setString(4, usuario.getCargo());
-            pstm.setString(5, usuario.getSetor());
+            pstm.setObject(4, usuario.getCargo());
+            pstm.setObject(5, usuario.getSetor());
             pstm.setString(6, usuario.getTelefone());
 
             sucesso = pstm.execute();
@@ -43,7 +43,7 @@ public class UsuarioDAO {
 
             sucesso = pstm.execute();
             connection.close();
-            return sucesso; 
+            return sucesso;
         }
     }
 
@@ -57,11 +57,11 @@ public class UsuarioDAO {
             ResultSet rst = pstm.executeQuery();
             Usuario usuario = null;
             if (rst.next()) {
-                usuario = new Usuario(rst.getInt("id"), rst.getString("nome"), rst.getString("email"), rst.getString("senha"), rst.getString("cargo"), rst.getString("setor"), rst.getString("telefone"));
+                usuario = new Usuario(rst.getInt("id"), rst.getString("nome"), rst.getString("email"), rst.getString("senha"), rst.getObject("cargo", Cargo.class), rst.getObject("setor", Setor.class), rst.getString("telefone"));
             }
 
             return usuario;
-        } 
+        }
     }
 
     public ArrayList<Usuario> retriveAll() throws SQLException {
@@ -78,10 +78,10 @@ public class UsuarioDAO {
             String nome = rst.getString("nome");
             String email = rst.getString("email");
             String senha = rst.getString("senha");
-            Cargo cargo = rst.getString("cargo");
-            Setor setor = rst.getString("setor");
+            Cargo cargo = rst.getObject("cargo", Cargo.class);
+            Setor setor = rst.getObject("setor", Setor.class);
             String telefone = rst.getString("telefone");
-            
+
             Usuario u = new Usuario(id, nome, email, senha, cargo, setor, telefone);
             usuarios.add(u);
         }
@@ -100,14 +100,14 @@ public class UsuarioDAO {
             pstm.setString(1, usuario.getNome());
             pstm.setString(2, usuario.getEmail());
             pstm.setString(3, usuario.getSenha());
-            pstm.setString(4, usuario.getCargo());
-            pstm.setString(5, usuario.getSetor());
+            pstm.setObject(4, usuario.getCargo());
+            pstm.setObject(5, usuario.getSetor());
             pstm.setString(6, usuario.getTelefone());
             pstm.setInt(7, usuario.getId());
 
             sucesso = pstm.execute();
             connection.close();
-            return sucesso; 
+            return sucesso;
         }
     }
 }
