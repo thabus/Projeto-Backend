@@ -23,5 +23,12 @@ public class Main {
         ArrayList<Usuario> usuario = new ArrayList<Usuario>(udao.retriveAll());
 
     }
- 
+
+    //Fazer select dos requisitos aqui na main
+    //selec count from chamados where "total de chamaods"
+    //select do usuario pelo email 
+    //create usuario 
+    //selec count from chamados where = true
+    //selec count from chamados where = "setor ti" group by status 
+    //select count from chamados where "setor TI" end status atendido group by id do funcionario 
 }
