@@ -19,7 +19,6 @@ public class ChamadoControle {
     //    ChamadoDAO tdao = new ChamadoDAO(this.connection);
     //    return tdao.retriveAllUsuario(A);
 
-    //}
 
 
 }
