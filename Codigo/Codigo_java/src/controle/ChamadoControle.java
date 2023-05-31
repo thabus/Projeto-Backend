@@ -11,10 +11,15 @@ public class ChamadoControle {
     private Connection connection;
 
     public ChamadoControle(Connection connection){
-        ConnectionFactory fabricade
+        ConnectionFactory fabricaDeConexao = new ConnectionFactory();
+        this.connection = fabricaDeConexao.recuperarConexao();
     }
 
     public ArrayList<Chamado> getChamadosUsuarios(Usuario A){
+        ChamadoDAO tdao = new ChamadoDAO(this.connection);
+        return tdao.retriveAllUsuario(A);
 
     }
+
+    
 }
