@@ -15,11 +15,11 @@ public class ChamadoControle {
         this.connection = fabricaDeConexao.recuperarConexao();
     }
 
-    public ArrayList<Chamado> getChamadosUsuarios(Usuario A){
-        ChamadoDAO tdao = new ChamadoDAO(this.connection);
-        return tdao.retriveAllUsuario(A);
+    //public ArrayList<Chamado> getChamadosUsuarios(Usuario A){
+    //    ChamadoDAO tdao = new ChamadoDAO(this.connection);
+    //    return tdao.retriveAllUsuario(A);
 
-    }
+    //}
 
-    
+
 }
