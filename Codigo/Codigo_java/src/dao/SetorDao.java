@@ -11,7 +11,7 @@ import model.Setor;
 
 public class SetorDao {
     
-    public Setor getById() throws SQLException{
+    public Setor getById(int id) throws SQLException{
         CriaConexao criaConexao = new CriaConexao();
         Connection connection = criaConexao.recuperarConexao();
         String sql = "SELECT * FROM setor WHERE id = ? ";

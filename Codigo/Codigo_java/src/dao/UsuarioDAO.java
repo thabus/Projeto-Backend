@@ -79,7 +79,10 @@ public class UsuarioDAO {
             String email = rst.getString("email");
             String senha = rst.getString("senha");
             Cargo cargo = rst.getObject("cargo", Cargo.class);
-            Setor setor = rst.getObject("setor", Setor.class);
+            //Setor setor = rst.getObject("setor", Setor.class);
+            int id_setor = rst.getInt("setor");
+            SetorDao sdao = new SetorDao();
+            Setor setor = sdao.getById(id_setor);
             String telefone = rst.getString("telefone");
 
             Usuario u = new Usuario(id, nome, email, senha, cargo, setor, telefone);
