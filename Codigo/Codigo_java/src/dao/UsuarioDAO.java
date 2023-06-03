@@ -93,6 +93,28 @@ public class UsuarioDAO {
         return usuarios;
     }
 
+    public ArrayList<Usuario> retriveAcesso(String email, String senha) throws SQLException {
+        CriaConexao criaConexao = new CriaConexao();
+        Connection connection = criaConexao.recuperarConexao();
+        String sql = "SELECT * FROM usuario WHERE email = ? AND senha = ?";
+
+        try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)){
+            pstm.setString(1, email);
+            pstm.setString(2, senha);
+            ResultSet rst = pstm.executeQuery();
+            Usuario usuario = null;
+            if (rst.next()){
+                usuario = Usuario(rst.getInt("id"), rst.getString("nome"), rst.getString("email"), rst.getString("senha"), ((Cargo) rst).getNome(), ((Setor) rst).getNome(), rst.getString("telefone"));
+
+                connection.close();
+
+               
+            }
+        }
+    }
+
+
+
     public boolean update(Usuario usuario) throws SQLException {
         CriaConexao criaConexao = new CriaConexao();
         Connection connection = criaConexao.recuperarConexao();
