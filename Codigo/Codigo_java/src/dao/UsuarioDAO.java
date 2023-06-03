@@ -78,8 +78,9 @@ public class UsuarioDAO {
             String nome = rst.getString("nome");
             String email = rst.getString("email");
             String senha = rst.getString("senha");
-            Cargo cargo = rst.getObject("cargo", Cargo.class);
-            //Setor setor = rst.getObject("setor", Setor.class);
+            String nome_cargo = rst.getString("cargo");
+            CargoDAO cdao = new CargoDAO();
+            Cargo cargo = cdao.getByNome(nome_cargo);
             int id_setor = rst.getInt("setor");
             SetorDao sdao = new SetorDao();
             Setor setor = sdao.getById(id_setor);
@@ -102,14 +103,31 @@ public class UsuarioDAO {
             pstm.setString(1, email);
             pstm.setString(2, senha);
             ResultSet rst = pstm.executeQuery();
-            Usuario usuario = null;
+            ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+
             if (rst.next()){
-                usuario = Usuario(rst.getInt("id"), rst.getString("nome"), rst.getString("email"), rst.getString("senha"), ((Cargo) rst).getNome(), ((Setor) rst).getNome(), rst.getString("telefone"));
+                int id = rst.getInt("id");
+                String nome = rst.getString("nome");
+                String e_mail = rst.getString("email");
+                String senha_recupera = rst.getString("senha");
+                String nome_cargo = rst.getString("cargo");
+                CargoDAO cdao = new CargoDAO();
+                Cargo cargo = cdao.getByNome(nome_cargo);
+                int id_setor = rst.getInt("setor");
+                SetorDao sdao = new SetorDao();
+                Setor setor = sdao.getById(id_setor);
+                String telefone = rst.getString("telefone");
+    
+                Usuario u = new Usuario(id, nome, e_mail, senha_recupera, cargo, setor, telefone);
+                usuarios.add(u);
+            
 
                 connection.close();
 
-               
+               return usuarios;
             }
+
+            return usuarios;
         }
     }
 
