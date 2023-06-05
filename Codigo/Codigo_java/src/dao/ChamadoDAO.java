@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import model.Chamado;
+import model.Usuario;
 
 public class ChamadoDAO {
 
@@ -15,6 +16,10 @@ public class ChamadoDAO {
 
     public ChamadoDAO(Connection connection) throws SQLException{
         this.connection = connection;
+    }
+
+
+    public ChamadoDAO() {
     }
 
 
@@ -187,6 +192,11 @@ public class ChamadoDAO {
             connection.close();
             return sucesso;
         }
+    }
+
+
+    public ArrayList<ChamadoDAO> retriveAllUsuario(Usuario a) {
+        return null;
     }
 }
 

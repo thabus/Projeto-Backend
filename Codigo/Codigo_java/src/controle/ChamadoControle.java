@@ -4,25 +4,26 @@ import dao.ConnectionFactory;
 import model.Usuario;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ChamadoControle {
     //lista de chamados
-    private ChamadoDAO chamadoDAO;
+    private Connection connection;
 
-    public ChamadoControle(){
+    public ChamadoControle(Connection connection){
         ConnectionFactory fabricaDeConexao = new ConnectionFactory();
-        Connection connection = fabricaDeConexao.recuperarConexao();
+        this.connection = fabricaDeConexao.recuperarConexao();
         this.chamadoDAO(connection);
-
     }
 
     private void chamadoDAO(Connection connection) {
     }
 
-    //public ArrayList<Chamado> getChamadosUsuarios(Usuario A){
-    //    ChamadoDAO tdao = new ChamadoDAO(this.connection);
-    //    return tdao.retriveAllUsuario(A);
+    public ArrayList<ChamadoDAO> getChamadosUsuarios(Usuario A) throws SQLException{
+        ChamadoDAO tdao = new ChamadoDAO(this.connection);
+        return tdao.retriveAllUsuario(A);
+    }
 
 
 
