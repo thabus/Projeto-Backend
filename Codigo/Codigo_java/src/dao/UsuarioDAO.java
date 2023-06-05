@@ -17,7 +17,7 @@ public class UsuarioDAO {
         Connection connection = criaConexao.recuperarConexao();
         boolean sucesso = false;
 
-        String sql = "INSERT INTO usuario(nome, email, senha, cargo, setor, telefone) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO usuario(nome, email, senha, cargo, setor_id, telefone) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)) {
             pstm.setString(1, usuario.getNome());
             pstm.setString(2, usuario.getEmail());
@@ -116,10 +116,10 @@ public class UsuarioDAO {
                 SetorDao sdao = new SetorDao();
                 Setor setor = sdao.getById(id_setor);
                 String telefone = rst.getString("telefone");
-    
+
                 Usuario u = new Usuario(id, nome, e_mail, senha_recupera, cargo, setor, telefone);
                 usuarios.add(u);
-            
+
 
                 connection.close();
 
