@@ -11,9 +11,15 @@ import model.Chamado;
 
 public class ChamadoDAO {
 
+    Connection connection;
+
+    public ChamadoDAO(Connection connection) throws SQLException{
+        this.connection = connection;
+    }
+
+
     public boolean create(Chamado chamados) throws SQLException {
-        CriaConexao criaConexao = new CriaConexao();
-        Connection connection = criaConexao.recuperarConexao();
+
         boolean sucesso = false;
 
         String sql = "INSERT INTO chamados (protocolo, status, titulo, descricao, id_usuario, nome_solicitante, email_solicitante, telefone_solicitante, data_abertura) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -35,8 +41,7 @@ public class ChamadoDAO {
     }
 
     public boolean delete(Chamado chamados) throws SQLException {
-        CriaConexao criaConexao = new CriaConexao();
-        Connection connection = criaConexao.recuperarConexao();
+
         boolean sucesso = false;
 
         String sql = "DELETE FROM chamados WHERE protocolo = ?";
@@ -50,8 +55,7 @@ public class ChamadoDAO {
     }
 
     public Chamado getByProtocolo(int protocolo) throws SQLException {
-        CriaConexao criaConexao = new CriaConexao();
-        Connection connection = criaConexao.recuperarConexao();
+
         String sql = "SELECT * FROM chamados WHERE protocolo = ?";
 
         try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)){
@@ -68,8 +72,7 @@ public class ChamadoDAO {
     }
 
     public ArrayList<Chamado> retriveAll() throws SQLException {
-        CriaConexao criaConexao = new CriaConexao();
-        Connection connection = criaConexao.recuperarConexao();
+
         Statement stm = connection.createStatement();
         String sql = "SELECT * FROM chamados";
 
