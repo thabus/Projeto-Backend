@@ -8,11 +8,16 @@ import java.util.ArrayList;
 
 public class ChamadoControle {
     //lista de chamados
-    private Connection connection;
+    private ChamadoDAO chamadoDAO;
 
-    public ChamadoControle(Connection connection){
+    public ChamadoControle(){
         ConnectionFactory fabricaDeConexao = new ConnectionFactory();
-        this.connection = fabricaDeConexao.recuperarConexao();
+        Connection connection = fabricaDeConexao.recuperarConexao();
+        this.chamadoDAO(connection);
+
+    }
+
+    private void chamadoDAO(Connection connection) {
     }
 
     //public ArrayList<Chamado> getChamadosUsuarios(Usuario A){
