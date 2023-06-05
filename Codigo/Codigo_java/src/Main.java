@@ -20,8 +20,17 @@ public class Main {
 
         //chamadao.create(chamado1);
 
-        ArrayList<Usuario> usuario = new ArrayList<Usuario>(udao.retriveAll());
+        /* 
+        ArrayList<Usuario> usuarios = new ArrayList<Usuario>(udao.retriveAll());
 
+        for (Usuario usuario : usuarios) {
+            System.out.println(usuario);
+        }
+
+        */
+
+        Usuario usuarioA = new Usuario(3,"Thiago Alencar", "thiago@gmail.com", "thi123","21911111122");
+        udao.update(usuarioA);
     }
 
     //Fazer select dos requisitos aqui na main
