@@ -36,11 +36,10 @@ public class UsuarioDAO {
         CriaConexao criaConexao = new CriaConexao();
         Connection connection = criaConexao.recuperarConexao();
         boolean sucesso = false;
-
         String sql = "DELETE FROM usuario WHERE id = ?";
+
         try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)) {
             pstm.setInt(1, usuario.getId());
-
             sucesso = pstm.execute();
             connection.close();
             return sucesso;

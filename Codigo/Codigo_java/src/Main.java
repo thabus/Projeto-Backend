@@ -26,6 +26,11 @@ public class Main {
         for (Usuario usuario : usuariosAll) {
             System.out.println(usuario);
         }
+
+   
+
+        Usuario usuarioA = new Usuario(3,"Thiago Alencar", "thiago@gmail.com", "thi123","21911111122");
+        udao.update(usuarioA);
     }
 
     //Fazer select dos requisitos aqui na main
