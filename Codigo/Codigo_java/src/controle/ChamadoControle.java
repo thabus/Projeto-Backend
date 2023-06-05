@@ -26,5 +26,11 @@ public class ChamadoControle {
 
     //}
 
+    // Chamado chamado1 = new Chamado(1234, "aberto", "Troca de Fonte", "Meu computador queimou", 123445,"Amanda Senra", "amanda@gmail.com", "219121212131", LocalDate.of(2023, 8, 19));
+    // ChamadoDAO chamadao = new ChamadoDAO(connection);
+
+    //chamadao.create(chamado1);
+
+
 
 }

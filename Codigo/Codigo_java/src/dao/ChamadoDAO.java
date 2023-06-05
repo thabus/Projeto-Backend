@@ -17,7 +17,6 @@ public class ChamadoDAO {
         this.connection = connection;
     }
 
-
     public boolean create(Chamado chamados) throws SQLException {
 
         boolean sucesso = false;

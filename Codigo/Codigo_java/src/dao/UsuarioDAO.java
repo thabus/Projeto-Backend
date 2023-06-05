@@ -17,7 +17,7 @@ public class UsuarioDAO {
         Connection connection = criaConexao.recuperarConexao();
         boolean sucesso = false;
 
-        String sql = "INSERT INTO usuario(nome, email, senha, cargo, setor_id, telefone) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO usuario(nome, email, senha, cargo, setor, telefone) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)) {
             pstm.setString(1, usuario.getNome());
             pstm.setString(2, usuario.getEmail());

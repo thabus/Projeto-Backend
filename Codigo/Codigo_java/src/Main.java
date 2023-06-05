@@ -1,3 +1,4 @@
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,23 +9,21 @@ import model.Chamado;
 import model.Usuario;
 
 public class Main {
+    Connection connection;
+
     public static void main(String[] args) throws SQLException {
 
-        Usuario usuario1 = new Usuario("Thiago", "thiago@gmail.com", "thi123", "21911111122");
+        Usuario usuario1 = new Usuario("Lucas", "lucas@gmail.com", "luca111", "123456");
         UsuarioDAO udao = new UsuarioDAO();
 
         // udao.create(usuario1);
 
         udao.delete(usuario1);
 
-        Chamado chamado1 = new Chamado(1234, "aberto", "Troca de Fonte", "Meu computador queimou", 123445,"Amanda Senra", "amanda@gmail.com", "219121212131", LocalDate.of(2023, 8, 19));
-        ChamadoDAO chamadao = new ChamadoDAO();
+        ArrayList<Usuario> usuariosAcesso = new ArrayList<Usuario>(udao.retriveAcesso("thiago@gmail.com", "thi123"));
+        ArrayList<Usuario> usuariosAll = new ArrayList<Usuario>(udao.retriveAll());
 
-        //chamadao.create(chamado1);
-
-        ArrayList<Usuario> usuarios = new ArrayList<Usuario>(udao.retriveAcesso("thiago@gmail.com", "thi123"));
-
-        for (Usuario usuario : usuarios) {
+        for (Usuario usuario : usuariosAll) {
             System.out.println(usuario);
         }
     }
