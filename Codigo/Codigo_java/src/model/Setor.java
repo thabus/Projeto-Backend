@@ -12,6 +12,11 @@ public class Setor {
         this.gerente = gerente;
     }
 
+    public Setor(int id, String nome){
+        this.id = id;
+        this.nome = nome;
+    }
+
     @Override
     public String toString() {
         return

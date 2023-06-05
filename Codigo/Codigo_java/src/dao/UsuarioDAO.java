@@ -78,8 +78,12 @@ public class UsuarioDAO {
             String nome = rst.getString("nome");
             String email = rst.getString("email");
             String senha = rst.getString("senha");
-            Cargo cargo = rst.getObject("cargo", Cargo.class);
-            Setor setor = rst.getObject("setor", Setor.class);
+            String nome_cargo = rst.getString("cargo");
+            CargoDAO cdao = new CargoDAO();
+            Cargo cargo = cdao.getByNome(nome_cargo);
+            int id_setor = rst.getInt("setor");
+            SetorDao sdao = new SetorDao();
+            Setor setor = sdao.getById(id_setor);
             String telefone = rst.getString("telefone");
 
             Usuario u = new Usuario(id, nome, email, senha, cargo, setor, telefone);
@@ -89,6 +93,45 @@ public class UsuarioDAO {
 
         return usuarios;
     }
+
+    public ArrayList<Usuario> retriveAcesso(String email, String senha) throws SQLException {
+        CriaConexao criaConexao = new CriaConexao();
+        Connection connection = criaConexao.recuperarConexao();
+        String sql = "SELECT * FROM usuario WHERE email = ? AND senha = ?";
+
+        try (PreparedStatement pstm = (PreparedStatement) connection.prepareStatement(sql)){
+            pstm.setString(1, email);
+            pstm.setString(2, senha);
+            ResultSet rst = pstm.executeQuery();
+            ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+
+            if (rst.next()){
+                int id = rst.getInt("id");
+                String nome = rst.getString("nome");
+                String e_mail = rst.getString("email");
+                String senha_recupera = rst.getString("senha");
+                String nome_cargo = rst.getString("cargo");
+                CargoDAO cdao = new CargoDAO();
+                Cargo cargo = cdao.getByNome(nome_cargo);
+                int id_setor = rst.getInt("setor");
+                SetorDao sdao = new SetorDao();
+                Setor setor = sdao.getById(id_setor);
+                String telefone = rst.getString("telefone");
+    
+                Usuario u = new Usuario(id, nome, e_mail, senha_recupera, cargo, setor, telefone);
+                usuarios.add(u);
+            
+
+                connection.close();
+
+               return usuarios;
+            }
+
+            return usuarios;
+        }
+    }
+
+
 
     public boolean update(Usuario usuario) throws SQLException {
         CriaConexao criaConexao = new CriaConexao();
