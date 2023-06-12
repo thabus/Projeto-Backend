@@ -1,7 +1,7 @@
 # Projeto-Backend
 
 
-## TODO
+## TODO (19/06)
 - [ ] Fazer SELECTs que faltam (WHERE, COUNT...)
 - [ ] Completar respostas em JSON
 - [ ] Ver se relações no BD está correto
