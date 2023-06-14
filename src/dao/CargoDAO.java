@@ -41,4 +41,29 @@ public class CargoDAO {
 			throw new RuntimeException(e);
 		}
     }
+
+    public Cargo getCargoByLogin(String email, String senha) {
+        Cargo cargo = null;
+
+        try {
+            String sql = "SELECT cargo FROM usuario WHERE email = ? AND senha = ?";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+
+                pstm.setString(1, email);
+                pstm.setString(2, senha);
+                ResultSet rst = pstm.executeQuery();
+
+                while(rst.next()) {
+                    int nome_cargo = rst.getInt("cargo");
+                    CargoDAO cargoDAO = new CargoDAO(connection);
+                    cargo = cargoDAO.getById(nome_cargo);
+                }
+            }
+            return cargo;
+        } catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+    }
 }

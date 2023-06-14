@@ -53,6 +53,14 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public Usuario(String email) {
+        this.email = email;
+    }
+
+    public Usuario(Cargo cargoID) {
+        this.cargoID = cargoID;
+    }
+
     public int getId() {
         return this.id;
     }

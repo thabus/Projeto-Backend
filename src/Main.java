@@ -3,6 +3,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import controler.CargoControle;
+import controler.UsuarioControle;
 import dao.CargoDAO;
 import dao.ChamadoDAO;
 import dao.ConnectionFactory;
@@ -35,6 +37,9 @@ public class Main {
         Cargo cargo = new Cargo(1, "Analista TI", setor);
         Urgencia urgencia = new Urgencia(1, 5);
 
+        CargoControle cargoControle = new CargoControle();
+        UsuarioControle usuarioControle = new UsuarioControle();
+
         // System.out.println(cargodao.getById(2));
 
         
@@ -45,11 +50,19 @@ public class Main {
         Usuario usuarioResponsavel = new Usuario(11, "Criação Teste2", "criação.teste2@example.com", "senhaCria2", cargo,"(11) 95432-3333");
         Usuario usuarioDelete = new Usuario(24, "Criação Delete", "criação.teste2@example.com", "senhaCria2", cargo,"(11) 95432-3333");
         Usuario usuarioUpdate = new Usuario(21, "Update Teste", "update.teste1@example.com", "senhaUp", cargo,"(11) 98765-3333");
+        Usuario usuarioCargo = new Usuario(21, "Update Teste", "update.teste1@example.com", "senhaUp", cargo,"(11) 98765-3333");
 
         // System.out.println(udao.getById(1));
         // udao.create(usuarioDelete);
         // udao.delete(usuarioDelete);
         // udao.update(usuarioUpdate);
+        // String testeCargo = cargodao.getCargoByLogin("update.teste1@example.com", "senhaUp").getNome();
+        // System.out.println(testeCargo.equals("Analista TI"));
+
+        // System.out.println(cargoControle.verificaAdminByLogin());
+        usuarioControle.createUsuario(usuarioDelete);
+
+        // rafaela.santos@example.com senha456
 
         ArrayList<Usuario> usuariosAcesso = new ArrayList<Usuario>(udao.retriveAcesso("ana.souza@example.com", "senhaqwe"));
         ArrayList<Usuario> usuariosAll = new ArrayList<Usuario>(udao.retriveAll());

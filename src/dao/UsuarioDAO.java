@@ -171,4 +171,29 @@ public class UsuarioDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public ArrayList<String> retriveEmails() {
+
+        ArrayList<String> emails = new ArrayList<String>();
+
+        try {
+            String sql = "SELECT email FROM usuario";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                pstm.execute();
+                ResultSet rst = pstm.getResultSet();
+                while(rst.next()) {
+
+                    String email = rst.getString("email");
+
+                    Usuario usuario = new Usuario(email);
+                    emails.add(usuario.getEmail());
+                }
+            }
+            return emails;
+        } catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+    }
+
 }
