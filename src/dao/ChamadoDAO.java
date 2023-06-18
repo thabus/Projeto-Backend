@@ -146,6 +146,51 @@ public class ChamadoDAO {
 		}
     }
 
+    public void retriveContagem(Chamado chamado){
+        Chamado chamado = null;
+        try{
+            String sql = "SELECT COUNT(id) FROM chamados";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql)){
+                pstm.execute();
+                ResultSet rst = pstm.getResultSet();
+                while(rst.next()) {
+                    int id = rst.getInt("id"); 
+
+                    UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
+                    Usuario usuario = usuarioDAO.getById(usuarioID);
+                    
+                }
+            } return chamado;
+        } catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+    }
+
+
+    public void retriveChamadoSetor(Setor setor){
+        Chamado chamado = null;
+        try{
+            String sql = "SELECT COUNT(id) FROM chamados WHERE setor = ?";
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+				pstm.execute();
+                ResultSet rst = pstm.getResultSet();
+                while(rst.next()) {
+                    int id = rst.getInt("id");
+                    int setorID = rst.getInt("id_setor")
+                
+                    SetorDAO setorDAO = new SetorDAO(connection);
+                    Setor setor = setorDAO.getById(setorID);
+
+                    UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
+                    Usuario usuario = usuarioDAO.getById(usuarioID);
+                }
+        } return chamado;
+    } catch (SQLException e) {
+		throw new RuntimeException(e);
+	}
+}
+
     public void updateAll(Chamado chamado) {
         try {
             String sql = "UPDATE chamados SET status = ?, tipo = ?, titulo = ?, descricao = ?, id_setor = ?, id_usuario = ?, id_responsavel = ?, data_abertura = ?, data_fechamento = ?, urgencia = ?, prazo = ? WHERE id = ?";
@@ -217,6 +262,8 @@ public class ChamadoDAO {
             throw new RuntimeException(e);
         }
     }
+
+    
 }
 
 
