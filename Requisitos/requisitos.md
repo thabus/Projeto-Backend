@@ -1,5 +1,5 @@
-- [] O sistema deve possibilitar o cadastro de novos usuários.
-- [] O sistema deve possibilitar que pessoas cadastradas possam fazer login.
+-  O sistema deve possibilitar o cadastro de novos usuários.
+-  O sistema deve possibilitar que pessoas cadastradas possam fazer login.
 - [] O sistema deve conseguir encontrar a conta do usuário pelo seu email.
 - [] O sistema deve permitir que o usuário abra um chamado.
 - [] O sistema deve permitir que o usuário atenda um chamado.
