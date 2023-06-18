@@ -7,14 +7,14 @@ import dao.ConnectionFactory;
 import dao.UsuarioDAO;
 import model.Usuario;
 import utils.LeitoraDados;
-import controler.CargoControle;
+//import controler.CargoControle;
 
 public class UsuarioControle {
 
     private UsuarioDAO usuarioDAO;
     private Connection connection;
     private ConnectionFactory fabricaDeConexao;
-    private LeitoraDados leitora;
+    //private LeitoraDados leitora;
     private CargoControle cargoControle;
     ArrayList<String> usuariosEmail;
 
@@ -23,7 +23,7 @@ public class UsuarioControle {
         this.cargoControle = new CargoControle();
         this.connection = fabricaDeConexao.recuperarConexao();
         this.usuarioDAO = new UsuarioDAO(connection);
-        this.leitora = new LeitoraDados();
+        //this.leitora = new LeitoraDados();
     }
 
     public void createUsuario(Usuario usuario) {

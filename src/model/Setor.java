@@ -18,6 +18,10 @@ public class Setor implements Serializable {
         this.nome = nome;
     }
 
+    public Setor(int id){
+        this.id = id;
+    }
+
     public int getId() {
         return this.id;
     }

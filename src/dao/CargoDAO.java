@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 import model.Cargo;
+import model.Chamado;
 import model.Setor;
+import model.Usuario;
 
 public class CargoDAO {
 
@@ -42,7 +46,7 @@ public class CargoDAO {
 		}
     }
 
-    public Cargo getCargoByLogin(String email, String senha) {
+    public Cargo getCargoByUsuario(Usuario usuario) {
         Cargo cargo = null;
 
         try {
@@ -50,8 +54,8 @@ public class CargoDAO {
 
             try (PreparedStatement pstm = connection.prepareStatement(sql)) {
 
-                pstm.setString(1, email);
-                pstm.setString(2, senha);
+                pstm.setString(1, usuario.getEmail());
+                pstm.setString(2, usuario.getSenha());
                 ResultSet rst = pstm.executeQuery();
 
                 while(rst.next()) {
