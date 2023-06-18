@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import model.Chamado;
 import model.Setor;
@@ -146,50 +148,384 @@ public class ChamadoDAO {
 		}
     }
 
-    public void retriveContagem(Chamado chamado){
-        Chamado chamado = null;
-        try{
-            String sql = "SELECT COUNT(id) FROM chamados";
+    public ArrayList<Chamado> retriveForTriagem() {
+        ArrayList<Chamado> chamados = new ArrayList<>();
 
-            try (PreparedStatement pstm = connection.prepareStatement(sql)){
-                pstm.execute();
-                ResultSet rst = pstm.getResultSet();
-                while(rst.next()) {
-                    int id = rst.getInt("id"); 
+        try {
+            String sql = "SELECT * FROM chamados WHERE status = 'pendente' AND setor IS NULL";
 
-                    UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
-                    Usuario usuario = usuarioDAO.getById(usuarioID);
-                    
-                }
-            } return chamado;
-        } catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-    }
-
-
-    public void retriveChamadoSetor(Setor setor){
-        Chamado chamado = null;
-        try{
-            String sql = "SELECT COUNT(id) FROM chamados WHERE setor = ?";
             try (PreparedStatement pstm = connection.prepareStatement(sql)) {
-				pstm.execute();
-                ResultSet rst = pstm.getResultSet();
-                while(rst.next()) {
+                ResultSet rst = pstm.executeQuery();
+
+                while (rst.next()) {
                     int id = rst.getInt("id");
-                    int setorID = rst.getInt("id_setor")
-                
+                    String status = rst.getString("status");
+                    String tipo = rst.getString("tipo");
+                    String titulo = rst.getString("titulo");
+                    String descricao = rst.getString("descricao");
+                    int setorID = rst.getInt("id_setor");
+                    int usuarioID = rst.getInt("id_usuario");
+                    int responsavelID = rst.getInt("id_responsavel");
+                    LocalDate dataAbertura = rst.getObject("data_abertura", LocalDate.class);
+                    LocalDate dataFechamento = rst.getObject("data_fechamento", LocalDate.class);
+                    int urgenciaID = rst.getInt("urgencia");
+                    LocalDate prazo = rst.getObject("prazo", LocalDate.class);
+
                     SetorDAO setorDAO = new SetorDAO(connection);
                     Setor setor = setorDAO.getById(setorID);
 
                     UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
                     Usuario usuario = usuarioDAO.getById(usuarioID);
+                    Usuario responsavel = usuarioDAO.getById(responsavelID);
+
+                    UrgenciaDAO urgenciaDAO = new UrgenciaDAO(connection);
+                    Urgencia urgencia = urgenciaDAO.getByEscala(urgenciaID);
+
+                    Chamado c = new Chamado(id, status, tipo, titulo, descricao, setor, usuario, responsavel, dataAbertura, dataFechamento, urgencia, prazo);
+                    chamados.add(c);
                 }
-        } return chamado;
-    } catch (SQLException e) {
-		throw new RuntimeException(e);
-	}
-}
+            }
+            return chamados;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Chamado> retriveByResponsaveleStatus(Usuario responsavel, String status) {
+        ArrayList<Chamado> chamados = new ArrayList<>();
+
+        try {
+            String sql = "SELECT * FROM chamados WHERE id_responsavel = ? AND status = ?";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                pstm.setInt(1, responsavel.getId());
+                pstm.setString(2, status);
+                ResultSet rst = pstm.executeQuery();
+
+                while (rst.next()) {
+                    int id = rst.getInt("id");
+                    String tipo = rst.getString("tipo");
+                    String titulo = rst.getString("titulo");
+                    String descricao = rst.getString("descricao");
+                    int setorID = rst.getInt("id_setor");
+                    int usuarioID = rst.getInt("id_usuario");
+                    LocalDate dataAbertura = rst.getObject("data_abertura", LocalDate.class);
+                    LocalDate dataFechamento = rst.getObject("data_fechamento", LocalDate.class);
+                    int urgenciaID = rst.getInt("urgencia");
+                    LocalDate prazo = rst.getObject("prazo", LocalDate.class);
+
+                    SetorDAO setorDAO = new SetorDAO(connection);
+                    Setor setor = setorDAO.getById(setorID);
+
+                    UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
+                    Usuario usuario = usuarioDAO.getById(usuarioID);
+
+                    UrgenciaDAO urgenciaDAO = new UrgenciaDAO(connection);
+                    Urgencia urgencia = urgenciaDAO.getByEscala(urgenciaID);
+
+                    Chamado c = new Chamado(id, status, tipo, titulo, descricao, setor, usuario, responsavel, dataAbertura, dataFechamento, urgencia, prazo);
+                    chamados.add(c);
+                }
+            }
+            return chamados;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Chamado> retriveByStatus(String status) {
+        ArrayList<Chamado> chamados = new ArrayList<>();
+
+        try {
+            String sql = "SELECT * FROM chamados WHERE status = ?";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                pstm.setString(1, status);
+                ResultSet rst = pstm.executeQuery();
+
+                while (rst.next()) {
+                    int id = rst.getInt("id");
+                    String tipo = rst.getString("tipo");
+                    String titulo = rst.getString("titulo");
+                    String descricao = rst.getString("descricao");
+                    int setorID = rst.getInt("id_setor");
+                    int usuarioID = rst.getInt("id_usuario");
+                    int responsavelID = rst.getInt("id_responsavel");
+                    LocalDate dataAbertura = rst.getObject("data_abertura", LocalDate.class);
+                    LocalDate dataFechamento = rst.getObject("data_fechamento", LocalDate.class);
+                    int urgenciaID = rst.getInt("urgencia");
+                    LocalDate prazo = rst.getObject("prazo", LocalDate.class);
+
+                SetorDAO setorDAO = new SetorDAO(connection);
+                Setor setor = setorDAO.getById(setorID);
+
+                UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
+                Usuario usuario = usuarioDAO.getById(usuarioID);
+                Usuario responsavel = usuarioDAO.getById(responsavelID);
+
+                UrgenciaDAO urgenciaDAO = new UrgenciaDAO(connection);
+                Urgencia urgencia = urgenciaDAO.getByEscala(urgenciaID);
+
+                Chamado c = new Chamado(id, status, tipo, titulo, descricao, setor, usuario, responsavel, dataAbertura, dataFechamento, urgencia, prazo);
+                chamados.add(c);
+                }
+            }
+            return chamados;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Chamado> retriveBySetor(Setor setor) {
+        ArrayList<Chamado> chamados = new ArrayList<>();
+
+        try {
+            String sql = "SELECT * FROM chamados WHERE id_setor = ?";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                pstm.setInt(1, setor.getId());
+                ResultSet rst = pstm.executeQuery();
+
+                while (rst.next()) {
+                    int id = rst.getInt("id");
+                    String status = rst.getString("status");
+                    String tipo = rst.getString("tipo");
+                    String titulo = rst.getString("titulo");
+                    String descricao = rst.getString("descricao");
+                    int usuarioID = rst.getInt("id_usuario");
+                    int responsavelID = rst.getInt("id_responsavel");
+                    LocalDate dataAbertura = rst.getObject("data_abertura", LocalDate.class);
+                    LocalDate dataFechamento = rst.getObject("data_fechamento", LocalDate.class);
+                    int urgenciaID = rst.getInt("urgencia");
+                    LocalDate prazo = rst.getObject("prazo", LocalDate.class);
+
+                    UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
+                    Usuario usuario = usuarioDAO.getById(usuarioID);
+                    Usuario responsavel = usuarioDAO.getById(responsavelID);
+
+                    UrgenciaDAO urgenciaDAO = new UrgenciaDAO(connection);
+                    Urgencia urgencia = urgenciaDAO.getByEscala(urgenciaID);
+
+                    Chamado c = new Chamado(id, status, tipo, titulo, descricao, setor, usuario, responsavel, dataAbertura, dataFechamento, urgencia, prazo);
+                    chamados.add(c);
+                }
+            }
+            return chamados;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Chamado> retriveByTipo(String tipo) {
+        ArrayList<Chamado> chamados = new ArrayList<>();
+
+        try {
+            String sql = "SELECT * FROM chamados WHERE tipo = ?";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                pstm.setString(1, tipo);
+                ResultSet rst = pstm.executeQuery();
+
+                while (rst.next()) {
+                    int id = rst.getInt("id");
+                    String status = rst.getString("status");
+                    String titulo = rst.getString("titulo");
+                    String descricao = rst.getString("descricao");
+                    int setorID = rst.getInt("id_setor");
+                    int usuarioID = rst.getInt("id_usuario");
+                    int responsavelID = rst.getInt("id_responsavel");
+                    LocalDate dataAbertura = rst.getObject("data_abertura", LocalDate.class);
+                    LocalDate dataFechamento = rst.getObject("data_fechamento", LocalDate.class);
+                    int urgenciaID = rst.getInt("urgencia");
+                    LocalDate prazo = rst.getObject("prazo", LocalDate.class);
+
+                    SetorDAO setorDAO = new SetorDAO(connection);
+                    Setor setor = setorDAO.getById(setorID);
+
+                    UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
+                    Usuario usuario = usuarioDAO.getById(usuarioID);
+                    Usuario responsavel = usuarioDAO.getById(responsavelID);
+
+                    UrgenciaDAO urgenciaDAO = new UrgenciaDAO(connection);
+                    Urgencia urgencia = urgenciaDAO.getByEscala(urgenciaID);
+
+                    Chamado c = new Chamado(id, status, tipo, titulo, descricao, setor, usuario, responsavel, dataAbertura, dataFechamento, urgencia, prazo);
+                    chamados.add(c);
+                }
+            }
+            return chamados;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Chamado> retriveByUsuario(Usuario usuario) {
+        ArrayList<Chamado> chamados = new ArrayList<>();
+
+        try {
+            String sql = "SELECT * FROM chamados WHERE id_usuario = ?";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                pstm.setInt(1, usuario.getId());
+                ResultSet rst = pstm.executeQuery();
+
+                while (rst.next()) {
+                    int id = rst.getInt("id");
+                    String status = rst.getString("status");
+                    String tipo = rst.getString("tipo");
+                    String titulo = rst.getString("titulo");
+                    String descricao = rst.getString("descricao");
+                    int setorID = rst.getInt("id_setor");
+                    int responsavelID = rst.getInt("id_responsavel");
+                    LocalDate dataAbertura = rst.getObject("data_abertura", LocalDate.class);
+                    LocalDate dataFechamento = rst.getObject("data_fechamento", LocalDate.class);
+                    int urgenciaID = rst.getInt("urgencia");
+                    LocalDate prazo = rst.getObject("prazo", LocalDate.class);
+
+                    SetorDAO setorDAO = new SetorDAO(connection);
+                    Setor setor = setorDAO.getById(setorID);
+
+                    UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
+                    Usuario responsavel = usuarioDAO.getById(responsavelID);
+
+                    UrgenciaDAO urgenciaDAO = new UrgenciaDAO(connection);
+                    Urgencia urgencia = urgenciaDAO.getByEscala(urgenciaID);
+
+                    Chamado c = new Chamado(id, status, tipo, titulo, descricao, setor, usuario, responsavel, dataAbertura, dataFechamento, urgencia, prazo);
+                    chamados.add(c);
+                }
+            }
+            return chamados;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Chamado> retriveByResponsavel(Usuario responsavel) {
+        ArrayList<Chamado> chamados = new ArrayList<>();
+
+        try {
+            String sql = "SELECT * FROM chamados WHERE id_responsavel = ?";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                pstm.setInt(1, responsavel.getId());
+                ResultSet rst = pstm.executeQuery();
+
+                while (rst.next()) {
+                    int id = rst.getInt("id");
+                    String status = rst.getString("status");
+                    String tipo = rst.getString("tipo");
+                    String titulo = rst.getString("titulo");
+                    String descricao = rst.getString("descricao");
+                    int setorID = rst.getInt("id_setor");
+                    int usuarioID = rst.getInt("id_usuario");
+                    LocalDate dataAbertura = rst.getObject("data_abertura", LocalDate.class);
+                    LocalDate dataFechamento = rst.getObject("data_fechamento", LocalDate.class);
+                    int urgenciaID = rst.getInt("urgencia");
+                    LocalDate prazo = rst.getObject("prazo", LocalDate.class);
+
+                    SetorDAO setorDAO = new SetorDAO(connection);
+                    Setor setor = setorDAO.getById(setorID);
+
+                    UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
+                    Usuario usuario = usuarioDAO.getById(usuarioID);
+
+                    UrgenciaDAO urgenciaDAO = new UrgenciaDAO(connection);
+                    Urgencia urgencia = urgenciaDAO.getByEscala(urgenciaID);
+
+                    Chamado c = new Chamado(id, status, tipo, titulo, descricao, setor, usuario, responsavel, dataAbertura, dataFechamento, urgencia, prazo);
+                    chamados.add(c);
+                }
+            }
+            return chamados;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int getCount() {
+        int chamadosCount = 0;
+
+        try {
+            String sql = "SELECT COUNT(*) AS total FROM chamados";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                ResultSet rst = pstm.executeQuery();
+                if (rst.next()) {
+                    chamadosCount = rst.getInt("total");
+                }
+            }
+            return chamadosCount;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Map<Setor, Integer> getCountBySetor() {
+        Map<Setor, Integer> countMap = new HashMap<>();
+
+        try {
+            String sql = "SELECT id_setor, COUNT(*) AS total FROM chamados GROUP BY id_setor";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                ResultSet rst = pstm.executeQuery();
+                while (rst.next()) {
+                    int setorID = rst.getInt("id_setor");
+                    int count = rst.getInt("total");
+
+                    SetorDAO setorDAO = new SetorDAO(connection);
+                    Setor setor = setorDAO.getById(setorID);
+
+                    countMap.put(setor, count);
+                }
+            }
+            return countMap;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Map<String, Integer> getCountByTipo() {
+        Map<String, Integer> countMap = new HashMap<>();
+
+        try {
+            String sql = "SELECT tipo, COUNT(*) AS total FROM chamados GROUP BY tipo";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                ResultSet rst = pstm.executeQuery();
+                while (rst.next()) {
+                    String tipo = rst.getString("tipo");
+                    int count = rst.getInt("total");
+
+                    countMap.put(tipo, count);
+                }
+            }
+            return countMap;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Map<String, Integer> getCountByStatus() {
+        Map<String, Integer> countMap = new HashMap<>();
+
+        try {
+            String sql = "SELECT status, COUNT(*) AS total FROM chamados GROUP BY status";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                ResultSet rst = pstm.executeQuery();
+                while (rst.next()) {
+                    String status = rst.getString("status");
+                    int count = rst.getInt("total");
+
+                    countMap.put(status, count);
+                }
+            }
+            return countMap;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public void updateAll(Chamado chamado) {
         try {
