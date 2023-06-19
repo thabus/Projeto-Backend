@@ -1,29 +1,31 @@
 package controler;
 
 import java.sql.Connection;
+import java.time.LocalDate;
 import java.util.ArrayList;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import dao.ConnectionFactory;
 import dao.UsuarioDAO;
 import model.Usuario;
-import utils.LeitoraDados;
-//import controler.CargoControle;
+import utils.LocalDateAdapter;
 
 public class UsuarioControle {
 
     private UsuarioDAO usuarioDAO;
     private Connection connection;
     private ConnectionFactory fabricaDeConexao;
-    //private LeitoraDados leitora;
     private CargoControle cargoControle;
     ArrayList<String> usuariosEmail;
+    private Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).setPrettyPrinting().create();
 
     public UsuarioControle() {
         this.fabricaDeConexao = new ConnectionFactory();
         this.cargoControle = new CargoControle();
         this.connection = fabricaDeConexao.recuperarConexao();
         this.usuarioDAO = new UsuarioDAO(connection);
-        //this.leitora = new LeitoraDados();
     }
 
     public void createUsuario(Usuario usuario) {
@@ -46,12 +48,16 @@ public class UsuarioControle {
         }
     }
 
+    public String getUsuarioJsonById(int id) {
+        return gson.toJson(this.usuarioDAO.getById(id));
+    }
+
     public Usuario getUsuarioById(int id) {
         return this.usuarioDAO.getById(id);
     }
 
-    public ArrayList<Usuario> retriveAllUsuarios() {
-        return this.usuarioDAO.retriveAll();
+    public String retriveAllUsuarios() {
+        return gson.toJson(this.usuarioDAO.retriveAll());
     }
 
     public void updateAllUsuario(Usuario usuario) {

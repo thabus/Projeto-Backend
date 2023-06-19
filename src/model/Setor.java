@@ -46,6 +46,7 @@ public class Setor implements Serializable {
         this.gerenteID = gerenteID;
     }
 
+
     @Override
     public String toString() {
         return "{" +
@@ -54,5 +55,6 @@ public class Setor implements Serializable {
             ", gerenteID='" + getGerenteID() + "'" +
             "}";
     }
+
    
 }

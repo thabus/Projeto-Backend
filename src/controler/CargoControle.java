@@ -5,7 +5,6 @@ import java.sql.Connection;
 import dao.CargoDAO;
 import dao.ConnectionFactory;
 import model.Cargo;
-import model.Usuario;
 import utils.LeitoraDados;
 
 public class CargoControle {
@@ -22,18 +21,14 @@ public class CargoControle {
         this.leitora = new LeitoraDados();
     }
 
+    public Cargo getCargoById(int id) {
+        return this.cargoDAO.getById(id);
+    }
+
     public boolean verificaAdminByLogin() {
         String cargoNome = "";
 
-        System.out.print("Insira seu email: ");
-        String email = this.leitora.lerTexto();
-
-        System.out.print("Insira sua senha: ");
-        String senha = this.leitora.lerTexto();
-
-        Usuario usuario = new Usuario(email, senha);
-
-        Cargo cargo = this.cargoDAO.getCargoByUsuario(usuario);
+        Cargo cargo = this.cargoDAO.getCargoByUsuario(this.leitora.lerUsuario());
 
         if (cargo != null) {
             cargoNome = cargo.getNome();
@@ -45,15 +40,7 @@ public class CargoControle {
     public boolean verificaTriagemByLogin() {
         String cargoNome = "";
 
-        System.out.print("Insira seu email: ");
-        String email = this.leitora.lerTexto();
-
-        System.out.print("Insira sua senha: ");
-        String senha = this.leitora.lerTexto();
-
-        Usuario usuario = new Usuario(email, senha);
-
-        Cargo cargo = this.cargoDAO.getCargoByUsuario(usuario);
+        Cargo cargo = this.cargoDAO.getCargoByUsuario(this.leitora.lerUsuario());
 
         if (cargo != null) {
             cargoNome = cargo.getNome();
@@ -64,15 +51,7 @@ public class CargoControle {
 
     public Cargo getCargobyUsuario() {
 
-        System.out.print("Insira seu email: ");
-        String email = this.leitora.lerTexto();
-
-        System.out.print("Insira sua senha: ");
-        String senha = this.leitora.lerTexto();
-
-        Usuario usuario = new Usuario(email, senha);
-
-        Cargo cargo = this.cargoDAO.getCargoByUsuario(usuario);
+        Cargo cargo = this.cargoDAO.getCargoByUsuario(this.leitora.lerUsuario());
 
         return cargo;
     }

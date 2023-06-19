@@ -141,7 +141,7 @@ public class Usuario {
             ", nome='" + getNome() + "'" +
             ", email='" + getEmail() + "'" +
             ", senha='" + getSenha() + "'" +
-            ", cargo='" + getCargoID() + "'" +
+            ", cargo='" + getCargoID().getId() + "'" +
             ", telefone='" + getTelefone() + "'" +
             "}";
     }

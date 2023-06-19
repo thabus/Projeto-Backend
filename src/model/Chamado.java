@@ -40,6 +40,23 @@ public class Chamado {
         this.dataAbertura = dataAbertura;
     }
 
+    public Chamado(int id, String tipo, Setor setorID, Usuario usuarioID, Usuario responsavelID, Urgencia urgencia) {
+        this.id = id;
+        this.tipo = tipo;
+        this.setorID = setorID;
+        this.usuarioID = usuarioID;
+        this.responsavelID = responsavelID;
+        this.urgencia = urgencia;
+    }
+
+    public Chamado(int id, String status, Setor setorID, Usuario usuarioID, Usuario responsavelID) {
+        this.id = id;
+        this.status = status;
+        this.setorID = setorID;
+        this.usuarioID = usuarioID;
+        this.responsavelID = responsavelID;
+    }
+
     public Chamado(int id, String tipo, Setor setorID, Urgencia urgencia) {
         this.id = id;
         this.tipo = tipo;
@@ -159,15 +176,15 @@ public class Chamado {
         return "{" +
             " id='" + getId() + "'" +
             ", status='" + getStatus() + "'" +
-            ", idSetor='" + getSetorID() + "'" +
             ", tipo='" + getTipo() + "'" +
             ", titulo='" + getTitulo() + "'" +
             ", descricao='" + getDescricao() + "'" +
-            ", idUsuario='" + getUsuarioID() + "'" +
-            ", idResponsavel='" + getResponsavelID() + "'" +
+            ", idSetor='" + getSetorID().getId() + "'" +
+            ", idUsuario='" + getUsuarioID().getId() + "'" +
+            ", idResponsavel='" + getResponsavelID().getId() + "'" +
             ", dataAbertura='" + getDataAbertura() + "'" +
             ", dataFechamento='" + getDataFechamento() + "'" +
-            ", urgencia='" + getUrgencia() + "'" +
+            ", urgencia='" + getUrgencia().getDias() + "'" +
             ", prazo='" + getPrazo() + "'" +
             "}";
     }

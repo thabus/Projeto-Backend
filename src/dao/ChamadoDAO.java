@@ -152,7 +152,7 @@ public class ChamadoDAO {
         ArrayList<Chamado> chamados = new ArrayList<>();
 
         try {
-            String sql = "SELECT * FROM chamados WHERE status = 'pendente' AND setor IS NULL";
+            String sql = "SELECT * FROM chamados WHERE status = 'pendente' AND id_setor IS NULL";
 
             try (PreparedStatement pstm = connection.prepareStatement(sql)) {
                 ResultSet rst = pstm.executeQuery();
@@ -476,7 +476,10 @@ public class ChamadoDAO {
                     SetorDAO setorDAO = new SetorDAO(connection);
                     Setor setor = setorDAO.getById(setorID);
 
-                    countMap.put(setor, count);
+                    if (setor != null) {
+                        countMap.put(setor, count);
+                    }
+
                 }
             }
             return countMap;
@@ -497,7 +500,9 @@ public class ChamadoDAO {
                     String tipo = rst.getString("tipo");
                     int count = rst.getInt("total");
 
-                    countMap.put(tipo, count);
+                    if (tipo != null) {
+                        countMap.put(tipo, count);
+                    }
                 }
             }
             return countMap;

@@ -43,7 +43,7 @@ public class Cargo implements Serializable{
         return "{" +
             " id='" + getId()+ "'" +
             " nome='" + getNome() + "'" +
-            ", setorID='" + getSetorID() + "'" +
+            ", setorID='" + getSetorID().getId() + "'" +
             "}";
     }
 }

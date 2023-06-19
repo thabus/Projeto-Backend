@@ -3,13 +3,17 @@ package controler;
 import dao.ChamadoDAO;
 import dao.ConnectionFactory;
 import model.Chamado;
-//import utils.LeitoraDados;
 import model.Setor;
 import model.Usuario;
+import utils.LocalDateAdapter;
 
 import java.sql.Connection;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Map;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class ChamadoControle {
     
@@ -17,6 +21,7 @@ public class ChamadoControle {
     private Connection connection;
     private ConnectionFactory fabricaDeConexao;
     private CargoControle cargoControle;
+    private Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).setPrettyPrinting().create();
 
     public ChamadoControle() {
         this.fabricaDeConexao = new ConnectionFactory();
@@ -37,12 +42,16 @@ public class ChamadoControle {
         }
     }
 
+    public String getChamadoJsonById(int id) {
+        return gson.toJson(this.chamadoDAO.getById(id));
+    }
+
     public Chamado getChamadoById(int id) {
         return this.chamadoDAO.getById(id);
     }
 
-    public ArrayList<Chamado> retriveAllChamados() {
-        return this.chamadoDAO.retriveAll();
+    public String retriveAllChamados() {
+        return gson.toJson(this.chamadoDAO.retriveAll());
     }
 
     public void updateAllChamado(Chamado chamado) {
@@ -85,48 +94,56 @@ public class ChamadoControle {
         }
     }
 
-    public ArrayList<Chamado> retriveChamadosForTriagem() {
-        return this.chamadoDAO.retriveForTriagem();
+    public String retriveChamadosForTriagem() {
+        return gson.toJson(this.chamadoDAO.retriveForTriagem());
     }
 
-    public ArrayList<Chamado> retriveChamadosByResponsaveleStatus(Usuario responsavel, String status) {
-        return this.chamadoDAO.retriveByResponsaveleStatus(responsavel, status);
+    public String retriveChamadosByResponsaveleStatus(Usuario responsavel, String status) {
+        return gson.toJson(this.chamadoDAO.retriveByResponsaveleStatus(responsavel, status));
     }
 
-    public ArrayList<Chamado> retriveChamadosByStatus(String status) {
-        return this.chamadoDAO.retriveByStatus(status);
+    public String retriveChamadosByStatus(String status) {
+        return gson.toJson(this.chamadoDAO.retriveByStatus(status));
     }
 
-    public ArrayList<Chamado> retriveChamadosBySetor(Setor setor) {
-        return this.chamadoDAO.retriveBySetor(setor);
+    public String retriveChamadosBySetor(Setor setor) {
+        return gson.toJson(this.chamadoDAO.retriveBySetor(setor));
     }
 
-    public ArrayList<Chamado> retriveChamadosByTipo(String tipo) {
-        return this.chamadoDAO.retriveByTipo(tipo);
+    public String retriveChamadosByTipo(String tipo) {
+        return gson.toJson(this.chamadoDAO.retriveByTipo(tipo));
     }
 
-    public ArrayList<Chamado> retriveChamadosByUsuario(Usuario usuario) {
-        return this.chamadoDAO.retriveByUsuario(usuario);
+    public String retriveChamadosByUsuario(Usuario usuario) {
+        return gson.toJson(this.chamadoDAO.retriveByUsuario(usuario));
     }
 
-    public ArrayList<Chamado> retriveChamadosByResponsavel(Usuario responsavel) {
-        return this.chamadoDAO.retriveByResponsavel(responsavel);
+    public String retriveChamadosByResponsavel(Usuario responsavel) {
+        return gson.toJson(this.chamadoDAO.retriveByResponsavel(responsavel));
     }
 
-    public int getCountChamados() {
-        return this.chamadoDAO.getCount();
+    public String getCountChamados() {
+        return gson.toJson(this.chamadoDAO.getCount());
     }
 
-    public Map<Setor, Integer> getCountChamadosBySetor() {
-        return this.chamadoDAO.getCountBySetor();
+    public String getCountChamadosBySetor() {
+        Map<Setor, Integer> countSetor = chamadoDAO.getCountBySetor();
+
+        Map<String, Integer> countSetorJson = new HashMap<>();
+        for (Map.Entry<Setor, Integer> entry : countSetor.entrySet()) {
+            Setor setor = entry.getKey();
+            int count = entry.getValue();
+            countSetorJson.put(setor.getNome(), count);
+        }
+        return gson.toJson(countSetorJson);
     }
 
-    public Map<String, Integer> getCountChamadosByTipo() {
-        return this.chamadoDAO.getCountByTipo();
+    public String getCountChamadosByTipo() {
+        return gson.toJson(this.chamadoDAO.getCountByTipo());
     }
 
-    public Map<String, Integer> getCountChamadosByStatus() {
-        return this.chamadoDAO.getCountByStatus();
+    public String getCountChamadosByStatus() {
+        return gson.toJson(this.chamadoDAO.getCountByStatus());
     }
 
 }
