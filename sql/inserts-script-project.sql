@@ -51,15 +51,19 @@ VALUES
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 INSERT INTO chamados (id, status, tipo, titulo, descricao, id_setor, id_usuario, id_responsavel, data_abertura, data_fechamento, urgencia, prazo)
 VALUES 
-(1, "Aberto", "Tipo - Exemplo 1.1", "Título 1", "Descrição exemplo 1", 1, 8, 1, "2023-04-24", NULL, 1, "2023-04-29"),
-(2, "Fechado", "Tipo - Exemplo 1.2", "Título 2", "Descrição exemplo 2", 1, 9, 2, "2023-04-20", "2023-04-22", 2, "2023-04-24"),
-(3, "Vencido", "Tipo - Exemplo 2.1", "Título 3", "Descrição exemplo 3", 2, 10, 6, "2023-04-21", NULL, 3, "2023-04-24"),
-(4, "Fechado", "Tipo - Exemplo 2.2", "Título 4", "Descrição exemplo 4", 3, 12, 7, "2023-04-23", "2023-04-24", 4, "2023-04-25"),
-(5, "Aberto", "Tipo - Exemplo 3.1", "Título 5", "Descrição exemplo 5", 3, 13, 8, "2023-04-26", NULL, 5, "2023-04-27"),
-(6, "Aberto", "Tipo - Exemplo 3.2", "Título 6", "Descrição exemplo 6", 3, 14, 9, "2023-05-01", NULL, 1, "2023-05-06"),
-(7, "Fechado", "Tipo - Exemplo 1.3", "Título 7", "Descrição exemplo 7", 1, 1, 7, "2023-05-10", "2023-05-13", 1, "2023-05-15"),
-(8, "Fechado", "Tipo - Exemplo 1.4", "Título 8", "Descrição exemplo 8", 1, 2, 8, "2023-05-12", "2023-05-14", 2, "2023-05-16"),
-(9, "Em atendimento", "Tipo - Exemplo 2.3", "Título 9", "Descrição exemplo 3", 2, 10, 9, "2023-05-15", NULL, 3, "2023-05-18"),
-(10, "Em atendimento", "Tipo - Exemplo 2.4", "Título 10", "Descrição exemplo 10", 3, 4, 10, "2023-05-18", NULL, 4, "2023-05-20"),
-(11, "Aberto", "Tipo - Exemplo 3.3", "Título 11", "Descrição exemplo 11", 3, 5, 11, "2023-05-20", NULL, 5, "2023-05-21"),
-(12, "Vencido", "Tipo - Exemplo 3.4", "Título 12", "Descrição exemplo 12", 3, 6, 12, "2023-05-25", NULL, 1, "2023-05-30");
+(1, "Aberto", "Tipo 1", "Título 1", "Descrição 1", 1, 8, 1, "2023-04-24", NULL, 1, "2023-04-29"),
+(2, "Fechado", "Tipo 1", "Título 2", "Descrição 2", 1, 9, 2, "2023-04-20", "2023-04-22", 2, "2023-04-24"),
+(3, "Vencido", "Tipo 2", "Título 3", "Descrição 3", 2, 10, 6, "2023-04-21", NULL, 3, "2023-04-24"),
+(4, "Fechado", "Tipo 2", "Título 4", "Descrição 4", 3, 12, 7, "2023-04-23", "2023-04-24", 4, "2023-04-25"),
+(5, "Aberto", "Tipo 3", "Título 5", "Descrição 5", 3, 13, 8, "2023-04-26", NULL, 5, "2023-04-27"),
+(6, "Aberto", "Tipo 3", "Título 6", "Descrição 6", 3, 14, 9, "2023-05-01", NULL, 1, "2023-05-06"),
+(7, "Fechado", "Tipo 1", "Título 7", "Descrição 7", 1, 1, 7, "2023-05-10", "2023-05-13", 1, "2023-05-15"),
+(8, "Fechado", "Tipo 1", "Título 8", "Descrição 8", 1, 2, 8, "2023-05-12", "2023-05-14", 2, "2023-05-16"),
+(9, "Em atendimento", "Tipo 2", "Título 9", "Descrição 3", 2, 10, 9, "2023-05-15", NULL, 3, "2023-05-18"),
+(10, "Em atendimento", "Tipo 2", "Título 10", "Descrição 10", 3, 4, 10, "2023-05-18", NULL, 4, "2023-05-20"),
+(11, "Aberto", "Tipo 3", "Título 11", "Descrição 11", 3, 5, 11, "2023-05-20", NULL, 5, "2023-05-21"),
+(12, "Vencido", "Tipo 3", "Título 12", "Descrição 12", 3, 6, 12, "2023-05-25", NULL, 1, "2023-05-30"),
+(13, "Pendente", NULL, "Título 13", "Exemplo 1 pré triagem", NULL, 7, NULL, "2023-06-15", NULL, NULL, NULL),
+(14, "Pendente", NULL, "Título 14", "Exemplo 2 pré triagem", NULL, 7, NULL, "2023-06-16", NULL, NULL, NULL),
+(15, "Pendente", NULL, "Título 15", "Exemplo 3 pré triagem", NULL, 8, NULL, "2023-06-17", NULL, NULL, NULL),
+(16, "Pendente", NULL, "Título 16", "Exemplo 4 pré triagem", NULL, 8, NULL, "2023-06-18", NULL, NULL, NULL);

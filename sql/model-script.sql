@@ -37,8 +37,8 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `projeto-backend`.`Chamados` ;
 
 CREATE TABLE IF NOT EXISTS `projeto-backend`.`Chamados` (
-  `id` INT NOT NULL,
-  `status` VARCHAR(45) NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `status` VARCHAR(45) NULL DEFAULT 'Pendente',
   `tipo` VARCHAR(45) NULL,
   `titulo` VARCHAR(45) NOT NULL,
   `descricao` VARCHAR(45) NOT NULL,
