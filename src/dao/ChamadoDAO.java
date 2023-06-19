@@ -234,27 +234,27 @@ public class ChamadoDAO {
     }
 
     public ArrayList<Chamado> retriveByStatus(String status) {
-    ArrayList<Chamado> chamados = new ArrayList<>();
+        ArrayList<Chamado> chamados = new ArrayList<>();
 
-    try {
-        String sql = "SELECT * FROM chamados WHERE status = ?";
+        try {
+            String sql = "SELECT * FROM chamados WHERE status = ?";
 
-        try (PreparedStatement pstm = connection.prepareStatement(sql)) {
-            pstm.setString(1, status);
-            ResultSet rst = pstm.executeQuery();
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                pstm.setString(1, status);
+                ResultSet rst = pstm.executeQuery();
 
-            while (rst.next()) {
-                int id = rst.getInt("id");
-                String tipo = rst.getString("tipo");
-                String titulo = rst.getString("titulo");
-                String descricao = rst.getString("descricao");
-                int setorID = rst.getInt("id_setor");
-                int usuarioID = rst.getInt("id_usuario");
-                int responsavelID = rst.getInt("id_responsavel");
-                LocalDate dataAbertura = rst.getObject("data_abertura", LocalDate.class);
-                LocalDate dataFechamento = rst.getObject("data_fechamento", LocalDate.class);
-                int urgenciaID = rst.getInt("urgencia");
-                LocalDate prazo = rst.getObject("prazo", LocalDate.class);
+                while (rst.next()) {
+                    int id = rst.getInt("id");
+                    String tipo = rst.getString("tipo");
+                    String titulo = rst.getString("titulo");
+                    String descricao = rst.getString("descricao");
+                    int setorID = rst.getInt("id_setor");
+                    int usuarioID = rst.getInt("id_usuario");
+                    int responsavelID = rst.getInt("id_responsavel");
+                    LocalDate dataAbertura = rst.getObject("data_abertura", LocalDate.class);
+                    LocalDate dataFechamento = rst.getObject("data_fechamento", LocalDate.class);
+                    int urgenciaID = rst.getInt("urgencia");
+                    LocalDate prazo = rst.getObject("prazo", LocalDate.class);
 
                 SetorDAO setorDAO = new SetorDAO(connection);
                 Setor setor = setorDAO.getById(setorID);
@@ -603,6 +603,8 @@ public class ChamadoDAO {
             throw new RuntimeException(e);
         }
     }
+
+    
 }
 
 

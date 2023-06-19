@@ -12,7 +12,7 @@ import model.Usuario;
 
 public class Main {
     static Connection connection;
-
+    
     public static void main(String[] args) throws SQLException {
 
         Setor setor = new Setor(1, "TI");
